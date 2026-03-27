@@ -299,17 +299,38 @@ project
 
 ### 10.2 Agent + Skills + MCP 구조
 
+Codex가 실제 읽는 스킬 경로는 `~/.codex/skills/<이름>/SKILL.md`다.
+Claude는 기본적으로 `~/.claude/skills/<이름>/SKILL.md`를 읽고, 사용자가 실제 환경에서 `~/.claude/skils/<이름>/SKILL.md`를 쓰면 그 경로로 대체한다.
+`D:/work/nownobun-agent-skills/`의 `*.md` 파일은 소스이며, 배포 후 아래 구조가 된다.
+
 ```txt
-project
+~/.codex/
+├─ config.toml
+└─ skills/
+   ├─ ai-agent/
+   │  └─ SKILL.md
+   ├─ coding-assistant/
+   │  └─ SKILL.md
+   └─ ...
+
+~/.claude/
+└─ skills/                ← 기본 경로
+   ├─ ai-agent/
+   │  └─ SKILL.md
+   ├─ coding-assistant/
+   │  └─ SKILL.md
+   └─ ...
+
+# 사용자가 실제 환경에서 `~/.claude/skils/`를 쓰면 위 `skills/` 대신 그 경로 하나만 사용
+
+project/
+├─ .git
 ├─ AGENTS.md
-├─ README.md
-├─ .codex
+├─ global_instructions.md   ← 소스에서 복사
+├─ .codex/
 │  └─ config.toml
-├─ skills
-│  ├─ coding.md
-│  └─ trading.md
-├─ mcp
-└─ src
+├─ mcp/
+└─ src/
 ```
 
 ---
@@ -325,6 +346,9 @@ project
 - 특정 작업용 절차
 - 도메인별 작업 규칙
 - 재사용 가능한 작업 템플릿
+- 소스: `D:/work/nownobun-agent-skills/<이름>.md`
+- 배포 위치: `~/.codex/skills/<이름>/SKILL.md` 또는 `~/.claude/skills/<이름>/SKILL.md`
+- 배포 절차: `init-workspace-skills.md` 참조
 
 ### 11.3 MCP
 - 도구 연결
@@ -380,5 +404,5 @@ mcp/
 
 이렇게 나누면 구조가 가장 덜 꼬인다.
 
-### 11.2 Skills 보충 예시
+### 보충 예시
 - `coding-assistant.md`는 Codex/Claude 협업 구현 절차를 고정하는 skill이다.

@@ -25,17 +25,25 @@
 5. 문서 작성 후 형식 일관성을 점검한다.
 
 ## 저장소 성격
-- `global_instructions.md`: 전역 공통 지침
+이 저장소는 소스(source) 저장소다. 여기 있는 파일은 직접 Codex나 Claude에서 읽히지 않는다.
+배포 후 실제 도구가 읽는 위치는 `~/.codex/skills/<파일명에서 .md 제거>/SKILL.md` 또는 `~/.claude/skills/<파일명에서 .md 제거>/SKILL.md`다.
+Claude에서 사용자가 실제 경로를 `~/.claude/skils/...`로 운영하면 그 경로로 대체한다.
+배포 절차는 `init-workspace-skills.md`를 따른다.
+아래 스킬 문서 항목의 배포 경로 표기는 모두 위 원칙을 따른다.
+
+- `global_instructions.md`: 전역 공통 지침 (배포 대상: 프로젝트 루트 `global_instructions.md`)
 - `ai-agent.md`, `automation.md`, `coding-assistant.md`, `engineer.md`, `research.md`: 역할/상황별 지침
 - `claude-review.md`: Claude CLI 리뷰 규칙
 - `github-mcp.md`, `mariadb-mcp.md`, `stock-mcp.md`: MCP 사용 규칙
 - `stock-analysis.md`, `reality-check.md`: 분석 및 검증 프레임
 - `skill-create-rule.md`: 스킬 작성 규칙
 - `init-workspace-skills.md`: 워크스페이스/프로젝트에 공통 지침과 스킬 시트를 복사·갱신하는 초기화 규칙
-- `skills-설명-정리.md`: Codex/Skills/MCP 구조 메모 (참조용)
-- `list.md`, `reference.txt`: 레퍼런스 목록
+- `skills-설명-정리.md`: Codex/Skills/MCP 구조 메모 (참조용, 배포 대상 없음)
+- `list.md`, `reference.txt`: 레퍼런스 목록 (배포 대상 없음)
 
 ## 문서 선택 기준
+아래는 소스 파일 기준이다. 배포 후에는 `~/.codex/skills/<이름>/SKILL.md` 또는 `~/.claude/skills/<이름>/SKILL.md` 경로를 사용한다. Claude에서 실제 경로가 `~/.claude/skils/...`면 그쪽으로 대체한다.
+
 - 전역 응답 원칙, 사용자 호칭, 답변 스타일, 공통 판단 기준: `global_instructions.md`
 - AI 에이전트 설계, 오케스트레이션, MCP 구조, 상태 관리, 관측 가능성: `ai-agent.md`
 - 코딩 구현 협업 및 검토 절차: `coding-assistant.md`

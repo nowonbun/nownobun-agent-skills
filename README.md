@@ -53,7 +53,7 @@
 - `mariadb-mcp.md`: MariaDB MCP 조회 규칙
 - `stock-mcp.md`: Stock MCP 조회·예측 규칙
 - `skill-create-rule.md`: 스킬 작성 규칙
-- `init-workspace-skills.md`: 프로젝트 루트와 `~/.codex/skills`에 공통 지침/스킬 시트를 복사·동기화하는 초기화 규칙
+- `init-workspace-skills.md`: 프로젝트 루트와 `~/.codex/skills`, `~/.claude/skills`(사용자 지정 시 `~/.claude/skils`)에 공통 지침/스킬 시트를 복사·동기화하는 초기화 규칙
 - `skills-설명-정리.md`: Claude/Skills/MCP 구조 메모
 - `list.md`: 관련 저장소 및 참고 리포지토리 목록
 
