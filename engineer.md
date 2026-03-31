@@ -1,5 +1,5 @@
 ﻿---
-name: software-engineering
+name: engineer
 description: 소프트웨어 설계·구현·디버깅·운영 문제를 구조적으로 분석하고 해결책을 제시해야 할 때 사용한다.
 ---
 

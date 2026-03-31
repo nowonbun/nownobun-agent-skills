@@ -53,10 +53,9 @@
 - `mariadb-mcp.md`: MariaDB MCP 조회 규칙
 - `stock-mcp.md`: Stock MCP 조회·예측 규칙
 - `skill-create-rule.md`: 스킬 작성 규칙
+- `skill-check-rule.md`: 스킬 문서 저장소 정합성 점검 규칙
 - `markdown-safe-writing.md`: Markdown/문서 작성 시 UTF-8 저장, 셸 입력 손상 방지, 검증 절차 규칙
-- `init-workspace-skills.md`: 프로젝트 루트와 `~/.codex/skills`, `~/.claude/skills`(사용자 지정 시 `~/.claude/skils`)에 공통 지침/스킬 시트를 복사·동기화하는 초기화 규칙
-- `skills-설명-정리.md`: Claude/Skills/MCP 구조 메모
-- `list.md`: 관련 저장소 및 참고 리포지토리 목록
+- `skill-modify-history.md`: 스킬·지침 수정 이력 기록 규칙
 
 ### Claude review policy
 
@@ -65,3 +64,16 @@
 - 샌드박스 실행이 실패하면 권한 상승으로 재시도하고 결과를 보고한다.
 - 상세 워크플로와 대체 검증 규칙은 `coding-assistant.md`를 따른다.
 - Claude CLI 리뷰 호출 방식, 실패 처리, 보고 형식은 `claude-review.md`를 따른다.
+
+## Codex 스킬 배포 스크립트
+- `script/install-codex-skills.ps1`: Windows PowerShell용 Codex 스킬 배포 스크립트
+- `script/install-codex-skills.sh`: macOS/Linux용 Codex 스킬 배포 스크립트
+- 스킬로 배포할 루트 `*.md` 파일은 YAML frontmatter에 `name`, `description`을 포함해야 한다.
+- 각 스킬 문서는 `~/.codex/skills/<스킬명>/SKILL.md` 구조로 복사된다.
+- `~/.codex/config.toml`에는 `[[skills.config]]` 항목이 추가되며, 중복 경로는 건너뛴다.
+- `~/.codex/config.toml`의 `path`는 복사된 실제 스킬 경로를 가리켜야 한다.
+  ```toml
+  [[skills.config]]
+  path = "..."
+  enabled = true
+  ```

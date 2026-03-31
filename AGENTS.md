@@ -22,13 +22,15 @@
 2. 같은 주제의 인접 문서가 있으면 충돌 여부를 확인한다.
 3. 새 규칙 추가 시 우선순위와 적용 범위를 명확히 적는다.
 4. 링크/참조 경로가 있으면 수정 후 다시 확인한다.
-5. 문서 작성 후 형식 일관성을 점검한다.
+5. 스킬 문서, 전역 지침, 작업 규칙을 수정하는 경우 `skill-modify-history.md` 기준으로 같은 날 `history/skill_YYYYMMDD.md` 기록 대상인지 먼저 판단하고, 대상이면 바로 생성한다.
+6. 문서 작성 후 형식 일관성을 점검한다.
 
 ## 저장소 성격
 이 저장소는 소스(source) 저장소다. 여기 있는 파일은 직접 Codex나 Claude에서 읽히지 않는다.
+루트 폴더의 스킬 소스 md만 실제 skill 문서로 본다.
+하위 폴더의 md 파일은 백업 문서, 설명 메모, 이력 문서이며 skill 문서로 취급하지 않는다.
 배포 후 실제 도구가 읽는 위치는 `~/.codex/skills/<파일명에서 .md 제거>/SKILL.md` 또는 `~/.claude/skills/<파일명에서 .md 제거>/SKILL.md`다.
-Claude에서 사용자가 실제 경로를 `~/.claude/skils/...`로 운영하면 그 경로로 대체한다.
-배포 절차는 `init-workspace-skills.md`를 따른다.
+Claude에서 사용자가 실제 경로를 `~/.claude/skills/...`로 운영하면 그 경로를 사용한다.
 아래 스킬 문서 항목의 배포 경로 표기는 모두 위 원칙을 따른다.
 
 - `global_instructions.md`: 전역 공통 지침 (배포 대상: 프로젝트 루트 `global_instructions.md`)
@@ -37,13 +39,12 @@ Claude에서 사용자가 실제 경로를 `~/.claude/skils/...`로 운영하면
 - `github-mcp.md`, `mariadb-mcp.md`, `stock-mcp.md`: MCP 사용 규칙
 - `stock-analysis.md`, `reality-check.md`: 분석 및 검증 프레임
 - `skill-create-rule.md`: 스킬 작성 규칙
+- `skill-check-rule.md`: 스킬 문서 정합성 점검 규칙
+- `skill-modify-history.md`: 스킬·지침 수정 이력 기록 규칙
 - `markdown-safe-writing.md`: Markdown/문서 작성 시 UTF-8 저장, 셸 입력 손상 방지, 검증 절차 규칙
-- `init-workspace-skills.md`: 워크스페이스/프로젝트에 공통 지침과 스킬 시트를 복사·갱신하는 초기화 규칙
-- `skills-설명-정리.md`: Codex/Skills/MCP 구조 메모 (참조용, 배포 대상 없음)
-- `list.md`, `reference.txt`: 레퍼런스 목록 (배포 대상 없음)
 
 ## 문서 선택 기준
-아래는 소스 파일 기준이다. 배포 후에는 `~/.codex/skills/<이름>/SKILL.md` 또는 `~/.claude/skills/<이름>/SKILL.md` 경로를 사용한다. Claude에서 실제 경로가 `~/.claude/skils/...`면 그쪽으로 대체한다.
+아래는 소스 파일 기준이다. 배포 후에는 `~/.codex/skills/<이름>/SKILL.md` 또는 `~/.claude/skills/<이름>/SKILL.md` 경로를 사용한다.
 
 - 전역 응답 원칙, 사용자 호칭, 답변 스타일, 공통 판단 기준: `global_instructions.md`
 - AI 에이전트 설계, 오케스트레이션, MCP 구조, 상태 관리, 관측 가능성: `ai-agent.md`
@@ -58,8 +59,9 @@ Claude에서 사용자가 실제 경로를 `~/.claude/skils/...`로 운영하면
 - MariaDB MCP 조회 규칙: `mariadb-mcp.md`
 - StockSearcher MCP 조회/예측 규칙: `stock-mcp.md`
 - 스킬 작성 규칙: `skill-create-rule.md`
+- 스킬 문서 정합성 점검 규칙: `skill-check-rule.md`
+- 스킬·지침 수정 이력 기록: `skill-modify-history.md`
 - Markdown/문서 작성 시 한글 인코딩 안전 규칙: `markdown-safe-writing.md`
-- 프로젝트별 공통 지침/스킬 초기화 및 동기화: `init-workspace-skills.md`
 
 ## 문서 작성 규칙
 - 새 문서는 반드시 UTF-8로 저장한다.
@@ -84,7 +86,7 @@ Claude에서 사용자가 실제 경로를 `~/.claude/skils/...`로 운영하면
 - 아래를 최소 검증으로 본다.
   1. 제목/목차/번호 포맷 일관성 확인
   2. 인접 문서와 규칙 충돌 여부 확인
-  3. `list.md`, `reference.txt`, 다른 md에서의 참조 경로 확인
+  3. `README.md`, `AGENTS.md`, 다른 md에서의 참조 경로 확인
 - 검증을 못 한 항목은 답변에 명시한다.
 
 ## 실행/확인 명령어

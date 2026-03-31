@@ -348,7 +348,7 @@ project/
 - 재사용 가능한 작업 템플릿
 - 소스: `D:/work/nownobun-agent-skills/<이름>.md`
 - 배포 위치: `~/.codex/skills/<이름>/SKILL.md` 또는 `~/.claude/skills/<이름>/SKILL.md`
-- 배포 절차: `init-workspace-skills.md` 참조
+- 배포 절차 관련 과거 문서: `backup_skills/init-workspace-skills.md` 참조
 
 ### 11.3 MCP
 - 도구 연결
