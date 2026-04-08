@@ -24,7 +24,7 @@ $ErrorActionPreference = "Stop"
 # $DefaultTargetDir = "D:\work\target-workspace"
 # $DefaultSourceRoot = (Split-Path -Parent $PSScriptRoot)
 $DefaultTargetDir = "C:\Users\nowonbun\"
-$DefaultSourceRoot = "D:\work\nownobun-agent-skills"
+$DefaultSourceRoot = "D:\work\nowonbun-agent-skills"
 $DefaultSkillSourceDir = "codex-skills"
 
 if (-not $PSBoundParameters.ContainsKey("TargetDir")) {
