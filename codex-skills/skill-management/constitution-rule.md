@@ -24,6 +24,7 @@ description: Authors who create or revise global_instructions.md as the primary 
 
 ## Global Principles
 - You must write global principles as deterministic rules that can be validated from execution logs or file outputs.
+- You must write all normative rules in English.
 - You must define an explicit language rule for assistant responses.
 - You must define an explicit evidence rule that prohibits presenting assumptions as facts.
 - You must define an explicit safety rule for restricted paths and data-protection boundaries.
