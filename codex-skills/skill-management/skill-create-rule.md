@@ -93,6 +93,11 @@ description: <One sentence describing what it does and when to apply it>
 - When revising a skill document, you must leave a modification history record under `history/<relative-skill-path>/<skill-name>/`.
 - `<relative-skill-path>` must match the skill file path relative to `harness/`, including the `codex-harness/...` segments.
 
+## Completion Gate
+- When creating or revising a skill document, you must complete these artifacts in the same change set: skill rule file, Korean readme, and history record.
+- Before final completion reporting, you must verify existence of all three artifacts using file-path evidence.
+- If at least one required artifact is missing, you must stop completion reporting and create the missing artifact first.
+
 ## Source of Truth
 - This document is the single source of truth for skill document writing format and meaning-preservation standards.
 - `skill-governance-rule.md` is the single source of truth for governance tiers, risk triggers, and strict-vs-baseline control rules.
@@ -152,4 +157,5 @@ description: <One sentence describing what it does and when to apply it>
 - Rule strength, condition-first writing, exception handling, and reference-substitution rules follow `Rule Writing` criteria.
 - Rules in `Language and Companion Documentation` are satisfied, including English-only rule authoring and Korean readme placement.
 - Rules in `History Recording` are satisfied, including the history path pattern and per-skill path placement.
+- Rules in `Completion Gate` are satisfied, including three-artifact completion and pre-report existence verification.
 - There are no expressions violating ambiguity/duplication/structure prohibition rules in `Must NOT`.
