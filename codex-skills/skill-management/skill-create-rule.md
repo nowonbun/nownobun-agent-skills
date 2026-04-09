@@ -1,146 +1,155 @@
 ---
 name: skill-create-rule
-description: SKILL.md 파일을 하네스 구조와 의미 보존 기준에 맞게 작성하거나 개정할 때 따를 규칙을 정의한다.
+description: Authors who create or revise SKILL.md files must follow these structural and meaning-preservation rules.
 ---
+
+# Skill Create Rule
 
 # Must
 
 ## Scope
-- 이 문서는 스킬로 배포되는 `SKILL.md` 또는 그 원본 스킬 문서를 작성하거나 개정할 때 적용한다.
-- 이 문서의 목적은 스킬 문서를 설명문이 아니라 실행 하네스로 고정하는 것이다.
+- You must apply this document when creating or revising `SKILL.md` files distributed as skills, or their source skill documents.
+- The purpose of this document is to keep skill documents as executable harnesses, not explanatory prose.
 
 ## Out of Scope
-- `history/` 아래 이력 문서에는 이 문서의 모든 스킬 전용 규칙을 적용하지 않는다.
-- README, AGENTS, 일반 메모 문서에는 이 문서의 스킬 전용 형식 규칙을 그대로 적용하지 않는다.
+- You must not apply all skill-specific rules in this document to history documents under `history/`.
+- You must not apply the skill-specific format rules in this document as-is to README, AGENTS, or general memo documents.
+- You must not define governance tiers, risk triggers, or approval policies in this document.
 
 ## Structure
-- 파일 최상단에는 반드시 YAML frontmatter를 둔다.
-- frontmatter에는 반드시 `name`, `description`만 포함한다.
-- frontmatter 아래에는 반드시 한 줄 공백 후 H1 제목을 둔다.
-- 본문에는 반드시 `# Must`, `# Do NOT`, `# Definition of Done`를 둔다.
-- 절차의 선후관계가 결과에 영향을 주는 스킬인 경우에만 `# Flow`를 반드시 둔다.
-- 위 필수 H1에 포함되지 않는 규칙이 있으면 별도 H1을 추가한다. 단, 필수 H1을 대체하지 않는다.
-- 하나의 H1 아래에 독립 주제가 2개 이상이면 H2를 반드시 사용한다.
-- 하나의 H1 아래에 독립 주제가 1개뿐이면 H2를 두지 않는다.
-- 숫자 목록은 반드시 순서가 필요한 절차에만 쓴다.
-- `-` 목록은 반드시 병렬 규칙, 조건, 점검 항목에 쓴다.
-- 아래 조건 중 하나라도 만족하면 PlantUML(`puml`)을 반드시 작성한다.
-  - 분기 경로가 2개 이상이다.
-  - 병렬 단계가 존재한다.
-  - 실패 후 재시도, 되돌아감, 재진입 경로가 존재한다.
-  - 승인 또는 판단 주체가 2개 이상이다.
-- 위 조건에 해당하지 않으면 텍스트 또는 목록으로 작성한다.
-- 다이어그램에 포함되어야 하는 예외 조건, 세부 규칙, 해석 기준 중 레이블, 노트, 가드 조건으로 표시되지 않은 항목이 있으면 반드시 텍스트 설명을 추가한다.
-  - 예외 조건
-  - 세부 규칙
-  - 해석 기준
-- `# Definition of Done` 아래에는 반드시 최소 `## Verification`을 둔다.
-- 아래 조건 중 하나라도 만족하면 `# Definition of Done` 아래에 `## Monitoring`을 반드시 둔다.
-  - 자동화, 배치, 에이전트 루프가 존재한다.
-  - 실행 결과의 누락, 지연, 실패를 운영 중 감시해야 한다.
-  - 로그, 메트릭, 알림이 운영 기준에 포함된다.
-- 위 조건에 해당하지 않으면 `## Monitoring`을 작성하지 않는다.
-- 운영 감시가 필요 없는 스킬에 형식상 `## Monitoring`을 추가하고 `해당 없음`으로 채우지 않는다.
+- Always place YAML frontmatter at the top of the file.
+- Frontmatter must include only `name` and `description`.
+- Under frontmatter, place exactly one blank line and then a titled document H1.
+- Required section H1 headers (`# Must`, `# Must NOT`, `# Definition of Done`, and optional `# Flow`) must appear after the document H1.
+- The body must include `# Must`, `# Must NOT`, and `# Definition of Done`.
+- Include `# Flow` only when procedural order affects the outcome.
+- If there are rules not covered by the required H1 sections above, add separate H1 sections. Must not replace required H1 sections.
+- If an H1 contains two or more independent topics, use H2.
+- If an H1 contains only one independent topic, you must not add H2.
+- Use numbered lists only for procedures that require sequence.
+- Use `-` lists only for parallel rules, conditions, or checklist items.
+- You must write PlantUML (`puml`) when any of the following is true:
+  - There are parallel steps.
+  - There are retry, rollback, or re-entry paths after failure.
+  - There are two or more approval or decision actors.
+- If none of the conditions above apply, use text or lists.
+- If any exception condition, detailed rule, or interpretation standard that should be in the diagram is not represented as a label, note, or guard condition, you must add text explanation for:
+  - exception conditions
+  - detailed rules
+  - interpretation standards
+- You must add output examples when any of the following is true:
+  - Two or more interpretations occur under the same rule.
+  - Input format is not explicitly defined.
+  - Output format is not explicitly defined.
+- If none of the conditions above apply, you must not add output examples.
+- Under `# Definition of Done`, include at least `## Verification`.
+- Under `# Definition of Done`, include `## Monitoring` when any of the following is true:
+  - Automation, batch jobs, or agent loops exist.
+  - Missing, delayed, or failed execution results must be monitored in operations.
+  - Logs, metrics, or alerts are part of operational standards.
+- If the conditions above are not met, you must not write `## Monitoring`, and you must not add placeholder-only content such as `N/A`.
 
 ## Frontmatter
-- 형식은 정확히 아래를 따른다.
+- The format must exactly follow the structure below.
 
 ```yaml
 ---
 name: <skill-name>
-description: <무엇을 언제 적용하는지 한 문장으로 설명>
+description: <One sentence describing what it does and when to apply it>
 ---
 ```
 
-- `name`은 소문자, 숫자, 하이픈만 허용한다.
-- `name`은 64자 이내로 한다.
-- 복합어는 하이픈으로 연결한다.
-- `description`은 한국어 한 문장으로 작성한다.
-- `description`에는 대상, 상황, 행동을 함께 넣는다.
-- `description`에는 `필요시`, `적절히`, `상황에 따라`, `가능하면` 같은 모호어를 쓰지 않는다.
+- `name` allows only lowercase letters, numbers, and hyphens.
+- `name` must be 64 characters or fewer.
+- Connect compound words with hyphens.
+- Write `description` as one English sentence.
+- `description` must include target, situation, and action.
+- You must not use ambiguous terms in `description` such as `if needed`, `appropriately`, `depending on situation`, or `if possible`.
 
 ## Rule Writing
-- 규칙은 설명문이 아니라 실행 규칙으로 작성한다.
-- 각 규칙은 하나의 행동만 지시한다.
-- 규칙 강도는 문장 자체로 분명해야 한다.
-  - 의무: `반드시`, `항상`
-  - 조건부 의무: `<조건>인 경우 반드시`
-  - 금지: `금지한다`, `사용하지 않는다`
-- 적용 조건이 필요한 규칙은 조건을 먼저 적는다.
-- 예외가 있으면 같은 항목에서 함께 적는다.
-- 실패 처리나 대체 경로가 필요한 규칙은 생략하지 않는다.
-- 행동 규칙과 보고 형식은 분리한다.
-- 하나의 항목은 하나의 행동만 포함한다.
-- 다른 섹션에서 이미 정의된 규칙을 현재 섹션의 점검 항목이나 준수 기준으로 다시 써야 하는 경우에는 원문을 복제하지 말고, 어떤 섹션의 규칙을 검증하거나 따른다는 참조형 문장으로 치환한다.
-- 단, 참조형 치환 후 검증 가능성 또는 실행 가능성이 저하되는 규칙은 최소 표현을 유지한다.
+- Write rules as executable rules, not explanatory prose.
+- Each rule must instruct only one action.
+- The force of each rule must be explicit in the sentence itself.
+  - Mandatory: `must`, `always`
+  - Conditional mandatory: `must when <condition>`
+  - Prohibition: `prohibited`, `must not use`
+- For rules requiring conditions, write the condition first.
+- If exceptions exist, write them in the same item.
+- You must not omit rules that require failure handling or fallback paths.
+- Separate behavior rules from reporting formats.
+- Each item must contain only one action.
+- If a rule already defined in another section needs to be restated as a checklist or compliance criterion in the current section, you must not duplicate the original sentence; replace it with a reference sentence that indicates which section’s rule is being verified or followed.
+- You must keep explicit rule text instead of reference-only wording when either of the following is true:
+  - Pass/fail cannot be evaluated from the reference alone.
+  - Required actor, condition, or failure handling cannot be identified from the reference alone.
+
+## Language and Companion Documentation
+- When creating or revising skill documents, you must write all rule content in English.
+- You must create a Korean explanation document at `harness/doc/<relative-skill-path>/<skill-name>-readme.md`.
+- `<relative-skill-path>` must match the skill file path relative to `harness/`, including the `codex-harness/...` segments.
+- The Korean explanation document must describe purpose, key rules, and usage cautions without changing the original rule meaning.
+
+## History Recording
+- When revising a skill document, you must leave a modification history record under `history/<relative-skill-path>/<skill-name>/`.
+- `<relative-skill-path>` must match the skill file path relative to `harness/`, including the `codex-harness/...` segments.
 
 ## Source of Truth
-- 스킬 문서 작성 형식과 의미 보존 기준의 단일 원본은 이 문서다.
-- history 기록 의무와 생성 시점 기준의 단일 원본은 `skill-modify-history.md`다.
-- 교차 검토 호출 방식과 보고 형식의 단일 원본은 `claude-review.md`다.
-- 전역 응답 원칙과 사용자 프로필의 단일 원본은 `global_instructions.md`다.
+- This document is the single source of truth for skill document writing format and meaning-preservation standards.
+- `skill-governance-rule.md` is the single source of truth for governance tiers, risk triggers, and strict-vs-baseline control rules.
+- `skill-modify-history.md` is the single source of truth for history recording obligations and creation-time criteria.
+- `claude-review.md` is the single source of truth for cross-review invocation and reporting format.
+- `global_instructions.md` is the single source of truth for global response principles and user profile.
 
-# Do NOT
+# Must NOT
 
 ## Ambiguity
-- `적절히`, `필요시`, `가능하면`, `상황에 따라`, `유연하게`를 판단 기준 없이 쓰지 않는다.
-- 일반 상식 문장, 수사적 표현, 중복 설명을 넣지 않는다.
+- Must not use `appropriately`, `if needed`, `if possible`, `depending on situation`, or `flexibly` without decision criteria.
+- Must not include common-sense sentences, rhetorical phrasing, or redundant explanations.
 
 ## Duplication
-- 다른 문서의 규칙을 원본 표시 없이 복제하지 않는다.
-- 같은 규칙을 여러 섹션에 반복 작성하지 않는다.
-- 하나의 규칙을 의무와 금지 양쪽에 중복 배치하지 않는다.
+- Must not copy rules from other documents without identifying the original source.
+- Must not repeat the same rule across multiple sections.
+- Must not place one rule redundantly in both mandatory and prohibited sections.
 
 ## Weak Compression
-- 압축을 이유로 의무/조건부 의무/금지 수준을 약화하지 않는다.
-- 압축을 이유로 적용 조건, 예외, 선후관계, 실패 처리를 삭제하지 않는다.
-- `반드시`를 `한다`로, `금지한다`를 `지양한다`로 바꾸지 않는다.
+- Must not weaken mandatory / conditional mandatory / prohibition levels for compression.
+- Must not delete application conditions, exceptions, order dependencies, or failure handling for compression.
+- Must not change `must` to `do`, or `prohibited` to `discouraged`.
 
 ## Wrong Structure
-- H1 아래에 바로 장문 설명만 두고 실행 규칙을 생략하지 않는다.
-- 순서가 없는 규칙에 숫자 목록을 쓰지 않는다.
-- 순서가 필요한 절차를 `-` 목록으로 풀어쓰지 않는다.
+- Must not leave only long-form explanations directly under H1 while omitting executable rules.
+- Must not use numbered lists for rules without sequence.
+- Must not write sequential procedures as `-` lists.
 
 # Flow
 
 ## Authoring
-1. Scope와 Out of Scope를 먼저 정한다.
-2. Source of Truth를 명시한다.
-3. Must에 의무 규칙을 적는다.
-4. Do NOT에 금지 규칙을 적는다.
-5. 절차의 선후관계가 결과에 영향을 주면 Flow에 절차를 적는다.
-6. Definition of Done에 완료 판정 기준을 적는다.
-7. 마지막에 압축 전후 행동 결과가 같은지 검토한다.
+1. Define Scope and Out of Scope first.
+2. Specify Source of Truth.
+3. Write mandatory rules in Must.
+4. Write prohibited rules in Must NOT.
+5. If procedural order affects the result, write the procedure in Flow.
+6. Write completion criteria in Definition of Done.
+7. At the end, review whether action outcomes are identical before and after compression.
 
 ## Compression Review
-1. 규칙을 줄이기 전에 핵심 행동 단위를 먼저 나눈다.
-2. 각 규칙이 누가, 언제, 무엇을, 어떤 강도로 수행하는지 확인한다.
-3. 예외, 선후관계, 실패 처리가 필요한 규칙은 따로 표시한다.
-4. 압축 후에도 완료 판정 기준이 그대로 유지되는지 확인한다.
-
-## Section Design
-- H1, H2, 숫자 목록, `-` 목록 사용 기준은 `Structure`를 따른다.
-- 아래 조건 중 하나라도 만족하면 출력 예시를 반드시 추가한다.
-  - 동일 규칙으로 2개 이상의 해석이 발생한다.
-  - 입력 형식이 명시적으로 정의되지 않는다.
-  - 출력 형식이 명시적으로 정의되지 않는다.
-- 위 조건에 해당하지 않으면 출력 예시를 추가하지 않는다.
-
-## Done Design
-- `# Definition of Done`의 구조 요구사항은 `Structure`를 따른다.
-- `## Verification`은 완료 시점 검증을 정의한다.
-- `## Monitoring`은 `Structure`의 조건을 만족하는 경우에만 완료 이후 감시를 정의한다.
+1. Before compressing rules, split core action units first.
+2. Verify who performs each rule, when, what, and with what force level.
+3. Mark rules that require exceptions, order dependencies, or failure handling separately.
+4. Verify that completion criteria remain unchanged after compression.
 
 # Definition of Done
 
 ## Verification
-- `## Frontmatter` 규칙을 따르며, `name`과 `description`만 존재한다.
-- `## Structure` 규칙을 따르며, 본문 H1 구성·H1 순서·목록 사용 기준이 확인 가능하다.
-- `# Definition of Done` 아래에 `## Verification`이 존재한다.
-- `## Monitoring`이 있는 경우 `## Structure`의 Monitoring 조건을 만족한다.
-- `## Monitoring`이 없는 경우 `## Structure`의 Monitoring 비적용 조건과 충돌하지 않는다.
-- PlantUML을 사용한 경우 `## Structure`의 적용 조건과 텍스트 보조 설명 기준을 따른다.
-- PlantUML을 사용하지 않은 경우 `## Structure`의 비적용 조건과 충돌하지 않는다.
-- 단일 원본이 필요한 규칙은 문서명과 범위가 명시된다.
-- 규칙 강도, 조건 선행, 예외 처리, 참조형 치환 규칙이 `Rule Writing` 기준을 따른다.
-- `Do NOT` 섹션의 모호어·중복·구조 위반 금지 규칙을 위반하는 표현이 없다.
+- Follows `## Frontmatter` rules and contains only `name` and `description`.
+- Follows `## Structure` rules, and body H1 composition, H1 order, and list usage standards are verifiable.
+- `## Verification` exists under `# Definition of Done`.
+- If `## Monitoring` exists, it satisfies Monitoring conditions in `## Structure`.
+- If `## Monitoring` does not exist, it does not conflict with non-applicability conditions in `## Structure`.
+- If PlantUML is used, it follows application conditions and text-support explanation criteria in `## Structure`.
+- If PlantUML is not used, it does not conflict with non-applicability conditions in `## Structure`.
+- Rules requiring a single source of truth specify document name and scope.
+- Rule strength, condition-first writing, exception handling, and reference-substitution rules follow `Rule Writing` criteria.
+- Rules in `Language and Companion Documentation` are satisfied, including English-only rule authoring and Korean readme placement.
+- Rules in `History Recording` are satisfied, including the history path pattern and per-skill path placement.
+- There are no expressions violating ambiguity/duplication/structure prohibition rules in `Must NOT`.
