@@ -1,102 +1,102 @@
 ---
 name: skill-check-rule
-description: 스킬 문서 저장소의 정합성을 점검하거나 검증 기준을 문서화해야 할 때 적용할 규칙을 제공한다.
+description: Agents or reviewers who audit skill documentation repositories for consistency must apply this rule to validate structure, references, and cross-document compatibility.
 ---
 
-# Skill Consistency Check Rule Skill
+# Skill Check Rule
 
-## 목적
-스킬 문서 저장소의 파일 구조, 참조, 형식, 지시사항 사이의 논리 일관성을 점검해 충돌·모호성·운영 오류를 줄인다.
+# Must
 
-## 규칙
-1. 정합성 점검은 실제 파일 구조, 문서 내용, 스크립트 동작을 근거로 수행한다.
-2. 존재하지 않는 파일·경로·문서를 활성 문서처럼 참조하면 오류로 판단한다.
-3. 백업 문서, 설명 문서, 활성 스킬 문서는 파일 위치, frontmatter 유무, README/AGENTS의 설명을 근거로 역할을 구분해 검사한다.
-4. 활성 스킬 목록에는 실제 운영 대상 문서만 포함되어야 하며, 루트 폴더의 스킬 소스 md만 skill 문서로 본다.
-5. 더 이상 사용하지 않는 파일은 활성 규칙 문서처럼 설명하지 않는다.
-6. 각 스킬 문서는 파일명, frontmatter `name`, 설명 역할이 서로 모순되지 않아야 한다.
-7. 스킬로 배포되는 문서는 YAML frontmatter에 최소 `name`, `description`을 포함해야 한다.
-8. 저장소 문서의 설명은 실제 스크립트나 실제 파일 위치와 일치해야 한다.
-9. 한글 문서는 UTF-8로 읽혀야 하며, 치환 문자 `0x3F(?)` 또는 `U+FFFD`가 비정상적으로 나타나면 오류로 판단한다.
-10. 문서 간 참조 경로는 현재 저장소 구조 기준으로 해석 가능해야 한다.
-11. 예시 경로, 템플릿 경로, 플레이스홀더는 실제 참조와 구분해 설명해야 한다.
-12. 각 스킬 md 파일 간의 지시사항은 논리적으로 서로 양립 가능해야 한다.
-13. 한 스킬에서 한국어 작성을 지시하고 다른 스킬에서 같은 적용 범위에 일본어 작성을 지시하는 식의 상충 규칙이 있으면 오류로 판단한다.
-14. 한 스킬에서 작업 후 리뷰를 지시하고 다른 스킬에서 리뷰 후 작업을 같은 맥락의 필수 절차로 지시해 순환 의존이나 무한 반복이 생기면 오류로 판단한다.
-15. 어떤 지시사항에 대해 적용 범위, 우선순위, 예외 조건 없이 모호한 단어만 사용하면 오류로 판단한다.
-16. 규칙 15의 대표 예시로 `적절히`, `필요시`, `상황에 따라`, `가능하면` 같은 표현은 허용 조건이나 판단 기준이 함께 없으면 모호성 오류로 본다.
-17. 서로 다른 문서가 같은 규칙을 다룰 때는 우선 문서를 명시해야 하며, 단일 원본 원칙이 깨지면 오류로 판단한다.
-18. `global_instructions.md`와 `CLAUDE.md`에 적힌 스킬 목록과 각 스킬 설명은 동일해야 하며, 이름이나 설명이 다르면 정합성 오류로 판단한다.
-19. 스킬 문서, 전역 지침, 작업 규칙을 수정한 날에는 `skill-modify-history.md`의 기준에 맞는 `history/skill_YYYYMMDD.md` 기록이 있어야 하며, 없으면 정합성 오류로 판단한다. 단일 원본은 `skill-modify-history.md`다.
-20. 절차형 지시는 선후 관계가 닫힌 순서로 끝나야 하며, 시작 조건이 닫히지 않는 순환 의존 구조면 오류로 판단한다.
-21. 검증하지 못한 항목은 통과로 처리하지 말고 미검증으로 분리해 보고한다.
-22. 정합성 점검 결과는 파일별 사실, 충돌 여부, 모호성 여부, 남은 이슈를 나눠 보고한다.
+## Scope
+- You must apply this document when checking consistency across skill rule documents and related governance documents in the same repository.
+- You must run checks using file-system evidence, document content evidence, and executable script evidence when scripts are part of the checked scope.
+- For this document, "governed root scope" means `/Users/soonyub.hwang/desk/harness/codex-harness/`.
+- For this document, "same scope" means directives that apply to the same document set, execution context, and role in the governed root scope.
 
-## 체크리스트
-1. 파일 존재
-   - README, AGENTS, 스킬 문서에서 언급한 파일이 실제로 존재하는지 확인한다.
-   - 삭제·이동된 파일이 남아 있으면 참조 오류로 기록한다.
-2. 역할 분류
-   - 활성 스킬 문서인지, 백업본인지, 설명 메모인지 구분한다.
-   - 저장소 루트의 `README.md`, `AGENTS.md`와 역할 설명이 일치하는지 확인한다.
-   - 하위 폴더의 md 파일이 skill 목록에 포함되지 않았는지 확인한다.
-   - 규칙 문서 수정이 있는 날 `skill-modify-history.md` 기준의 `history/skill_YYYYMMDD.md`가 생성되었는지 확인한다.
-3. 형식 검사
-   - 스킬 문서는 frontmatter, 제목, 목적, 규칙 섹션이 있는지 확인한다.
-   - 파일명과 `name` 값이 일치하는지 확인한다.
-4. 참조 검사
-   - 문서 내부 경로가 현재 위치 기준으로 해석 가능한지 확인한다.
-   - 예시 경로와 실제 운영 경로를 혼동하지 않는지 확인한다.
-5. 인코딩 검사
-   - UTF-8로 읽히는지 확인한다.
-   - 치환 문자, 깨진 한글, 비정상적인 `?` 반복이 있는지 확인한다.
-6. 지시 충돌 검사
-   - 문서 간 언어 지시, 리뷰 순서, 승인 절차, 우선 문서를 비교한다.
-   - 서로 동시에 만족할 수 없는 규칙은 충돌로 기록한다.
-   - `global_instructions.md`와 `CLAUDE.md`의 스킬 목록, 스킬명, 설명 문구가 같은지 비교한다.
-7. 모호성 검사
-   - 판단 기준 없이 추상어만 있는 지시를 찾는다.
-   - 적용 범위가 없는 명령형 표현을 찾는다.
-8. 절차 순환 검사
-   - A가 B를 선행 조건으로 요구하고, B가 다시 A를 선행 조건으로 요구하는지 확인한다.
-   - 작업 → 리뷰 → 재작업 같은 정상 루프와, 시작 조건 자체가 닫히지 않는 순환을 구분한다.
+## Out of Scope
+- You must not classify backup notes or temporary memos as active skill rule documents.
+- You must not treat example paths or placeholder paths as operational paths.
 
-## 판정 기준
-1. 정상
-   - 파일 존재, 역할 설명, 형식, 지시사항이 모두 충돌 없이 맞는다.
-2. 오류
-   - 참조 대상 없음
-   - 역할 설명 불일치
-   - 형식 누락
-   - 인코딩 손상
-   - `global_instructions.md`와 `CLAUDE.md`의 스킬 목록 또는 설명 불일치
-   - 규칙 문서 수정일의 history 기록 누락
-   - 문서 간 지시 충돌
-   - 모호성 존재
-   - 절차 순환 존재
-3. 미검증
-   - 실제 파일이나 실행 근거를 확인하지 못한 항목
+## Source of Truth
+- This document is the single source of truth for consistency-check procedure and pass/fail criteria for skill-document repositories.
+- `../../../global_instructions.md` is the single source of truth for global principles and safety boundaries.
+- `../../../AGENTS.md` is the single source of truth for workspace execution triggers and operational workflows.
+- `./constitution-rule.md` is the single source of truth for constitution-layer priority and conflict handling.
+- `./skill-create-rule.md` is the single source of truth for skill-document authoring format and per-skill history path pattern.
+- `./skill-governance-rule.md` is the single source of truth for governance-tier definitions and governance controls.
+- `./skill-modify-history.md` is the single source of truth for additional history-recording obligations and day-based history criteria.
 
-## 보고 형식
-- 결론
-- 검사 범위
-- 확인한 사실
-- 발견한 오류
-- 미검증 항목
-- 수정 우선순위
+## File and Role Validation
+- If a referenced file does not exist at the resolved path, you must record an error.
+- You must classify each checked markdown document as active skill rule, backup/history, or explanatory document using path, frontmatter, and repository guidance files.
+- If a document is classified as non-operational, you must not describe it as an active rule source.
+- You must confirm that active-skill lists include only operational skill source documents in the governed root scope.
 
-## 우선순위 기준
-1. 순환 의존, 상호 충돌, 운영 절차 역전처럼 실행 자체를 막는 오류를 최우선으로 본다.
-2. 활성 문서가 삭제 파일을 참조하거나 잘못된 경로를 가리키는 오류를 다음 우선순위로 본다.
-3. 인코딩 손상, 형식 누락, 단일 원본 위반을 그다음 우선순위로 본다.
-4. 모호성 오류는 즉시 운영 장애를 만들지 않더라도 반복 해석 차이를 만들면 높은 우선순위로 본다.
+## Format and Identity Validation
+- If a document is an active skill rule, you must verify YAML frontmatter existence and required keys.
+- You must verify that file name, frontmatter `name`, and declared role are consistent.
+- You must verify that document descriptions and workflow references match actual files or scripts.
 
-## 예시
-1. 언어 충돌 오류
-   - `A.md`: 항상 한국어로 작성한다.
-   - `B.md`: 같은 범위의 답변을 항상 일본어로 작성한다.
-   - 결과: 상호 충돌이므로 정합성 오류다.
-2. 절차 순환 오류
-   - `A.md`: 작업 전에 반드시 B 검토를 끝낸다.
-   - `B.md`: 검토 전에 반드시 A 작업을 끝낸다.
-   - 결과: 시작 가능한 단계가 없으므로 정합성 오류다.
+## Path and Encoding Validation
+- You must verify that every operational reference path is resolvable in the current repository structure.
+- If a path is an example or template path, you must label it as non-operational in the report.
+- If Korean text contains repeated replacement characters such as `U+FFFD` or abnormal `?` substitutions from encoding corruption, you must record an encoding error.
+
+## Rule-Set Consistency Validation
+- You must verify that directives across checked documents are simultaneously satisfiable in the same scope.
+- If two directives in the same scope require contradictory mandatory language, you must record a conflict error.
+- If two directives create a mandatory procedural loop with no executable entry point, you must record a cyclic-dependency error.
+- If a directive uses ambiguous language without explicit scope, priority, or exception criteria, you must record an ambiguity error.
+- You must verify that overlapping rules declare a clear precedence source to preserve single-source-of-truth behavior.
+
+## History and Traceability Validation
+- If a checked rule document was revised, you must verify that a corresponding history record exists under the history path policy defined in `./skill-create-rule.md` and `./skill-modify-history.md`.
+- If required history evidence is missing, you must record a traceability error.
+- You must treat unverifiable items as `unverified`, not as pass.
+- You must use history records as the revision-tracking source, because frontmatter metadata is constrained by `./skill-create-rule.md`.
+
+## Reporting Requirements
+- You must report findings with separated sections for verified facts, detected errors, ambiguity findings, cyclic-dependency findings, and unverified items.
+- You must include severity ordering in the report.
+- You must assign highest severity to execution-blocking conflicts such as mandatory contradiction and non-startable procedural cycles.
+- You must assign next severity to missing operational references and broken paths in active documents.
+- You must assign next severity to format defects, encoding corruption, single-source-of-truth violations, and missing history evidence.
+
+# Must NOT
+
+## Prohibited Evaluation Behavior
+- You must not pass an item without evidence.
+- You must not merge `error` and `unverified` states into one status.
+- You must not report ambiguity findings without quoting the ambiguous expression and missing decision criteria.
+- You must not omit failure reasons when reporting a failed check.
+
+## Prohibited Rule Interpretation
+- You must not interpret optional examples as mandatory operational instructions.
+- You must not treat lower-priority documents as precedence sources when a higher-priority source already defines the rule.
+- You must not label a document pair as compatible when both cannot be satisfied together under the same conditions.
+
+# Flow
+
+## Consistency Check Procedure
+1. Build the target document list from active skill-rule and governance-rule markdown files under the governed root scope, and resolve canonical paths.
+2. Validate file existence and classify each document role.
+3. Validate frontmatter, identity consistency, and reference-to-implementation consistency for active rule documents.
+4. Validate operational paths and separate template/example paths.
+5. Validate encoding integrity for Korean text where applicable.
+6. Validate directive compatibility, precedence declarations, ambiguity criteria, and cyclic dependencies across documents.
+7. Validate required history evidence for revised rule documents.
+8. Produce the result report with separated status sections and severity order.
+
+# Definition of Done
+
+## Verification
+- Every checked item has evidence from files, logs, or executable outputs.
+- Missing references are recorded as `error`.
+- Non-operational documents are not classified as active rule sources.
+- Active rule documents pass frontmatter and identity consistency checks.
+- Operational paths are resolvable, and example/template paths are explicitly labeled as non-operational.
+- Encoding corruption signals are evaluated and reported when present.
+- Cross-document mandatory contradictions and cyclic dependencies are detected and reported when present.
+- Ambiguous directives without criteria are detected and reported when present.
+- Required history evidence for revised rule documents is validated and reported.
+- The final report contains separated sections for facts, errors, ambiguity, cyclic dependencies, unverified items, and severity order.
