@@ -1,123 +1,97 @@
 ---
 name: skill-modify-history
-description: 사용자의 기대와 실제 동작이 어긋났을 때, 스킬·지침 미준수 원인과 수정 조치를 이력으로 남기고 재발 방지 규칙을 기록할 때 사용한다.
+description: Agents revising skill or governance documents after expectation mismatches must record cause, correction, and prevention details in deterministic history files.
 ---
 
 # Skill Modify History
 
-## 목적
+# Must
 
-- 사용자 기대와 실제 동작 사이에 차이가 발생했을 때 원인을 기록한다.
-- 어떤 스킬, 지침, 규칙을 수정했는지 남긴다.
-- 같은 문제가 반복되지 않도록 재발 방지 조치를 구조적으로 문서화한다.
+## Scope
+- You must apply this document when user expectation and actual behavior differ, and the response requires revising skill, governance, or constitution rule documents.
+- You must apply this document to history-record obligations and creation-time criteria, not to skill markdown format design.
 
-## 기록 위치 규칙
+## Source of Truth
+- This document is the single source of truth for history-record obligations and day-based creation criteria.
+- `skill-create-rule.md` is the single source of truth for skill-document structure, frontmatter, and companion-artifact requirements.
 
-### 1. 사건 이력 문서
+## History Artifact Types
+- `daily history` means `history/skill_YYYYMMDD.md`.
+- `skill-scoped history` means files under `history/<relative-skill-path>/<skill-name>/`.
+- You must treat `daily history` and `skill-scoped history` as different artifact types.
+- You must use `daily history` for day-level incident aggregation.
+- You must use `skill-scoped history` for per-skill revision traceability.
 
-- 위치:
-  - `history/skill_YYYYMMDD.md`
-- 예:
-  - `history/skill_20260329.md`
+## Daily History Trigger Rules
+- Before editing any rule document, you must decide whether daily history creation is required.
+- You must create `history/skill_YYYYMMDD.md` immediately when at least one trigger below is true:
+  - skill list addition, deletion, or rename
+  - skill description change
+  - path-standard change
+  - consistency-rule addition or modification
+  - user-reported missing procedure
+- When all triggers are false, you must record `daily-history-trigger: no-op` in the final execution report.
 
-### 2. 규칙 문서 수정
+## Required Daily History Content
+- A required daily history file must include these sections:
+  - `Purpose`
+  - `Incident Summary`
+  - `Root Cause`
+  - `Impact`
+  - `Changes Applied`
+  - `Recurrence Prevention Rules`
+  - `Checklist`
+  - `Conclusion`
 
-- 실제로 수정한 문서는 함께 기록한다.
-- 예:
-  - `global_instructions.md`
-  - `claude-review.md`
-  - 관련 스킬 문서
+## Recording Rules
+- You must write one-line mismatch summary before writing detailed cause.
+- You must separate "why it happened" and "what changed" into different sections.
+- You must list exact modified file paths without abstraction.
+- You must write recurrence-prevention rules as executable procedures.
+- You must write checklist items that are reusable in the next similar task.
+- You must save history files as UTF-8.
+- You must not postpone required history creation to the final polishing phase.
+- Before final reporting, you must cross-check `today's modified rule document list` against `today's generated history files`.
 
-## 필수 기록 항목
+## Skill-Scoped History Language Rule
+- When writing under `history/<relative-skill-path>/<skill-name>/`, you must use the same language as the latest existing history file in that folder.
+- If no history file exists in that folder, you must use Japanese.
 
-히스토리 문서에는 반드시 아래 항목을 넣는다.
+## Cross-Review Requirement Rule
+- You must run cross-review only when at least one accessible source-of-truth document for the current task explicitly marks cross-review as mandatory, or when the user explicitly requests cross-review.
+- When cross-review is not required, you must record `cross-review: not required` in the final execution report.
 
-1. 목적
-2. 사건 요약
-3. 문제 원인
-4. 영향
-5. 이번에 수정한 내용
-6. 재발 방지 규칙
-7. 체크리스트
-8. 결론
+## Outputs
+- `history/skill_YYYYMMDD.md` when any daily-history trigger is true.
+- Updated file list of modified rule documents.
+- `daily-history-trigger: no-op` in the final execution report when all daily-history triggers are false.
+- Cross-review result log when cross-review is required.
 
-## 권장 작성 형식
+# Must NOT
 
-```md
-# skill 수정 이력 - YYYY-MM-DD
+## Prohibited Recording Behavior
+- You must not close an incident record with only "it was a mistake".
+- You must not omit modified file paths from history records.
+- You must not finish a rule-document revision on a trigger-active day without creating `history/skill_YYYYMMDD.md`.
+- You must not duplicate this document's history criteria as an independent rule set in other documents.
 
-## 목적
+# Flow
 
-## 사건 요약
+## Incident Recording Flow
+1. Summarize the expectation-versus-actual mismatch in one line.
+2. Evaluate daily-history triggers before any rule-file write.
+3. Create `history/skill_YYYYMMDD.md` immediately when a trigger is true; otherwise record `daily-history-trigger: no-op` in the final execution report.
+4. Revise related rule documents.
+5. Record root cause, changes, and prevention rules in history artifacts.
+6. Run cross-review only when `## Cross-Review Requirement Rule` conditions are true, and record the result in the final execution report.
+7. Cross-check modified rule files and generated history files before completion reporting.
 
-## 문제 원인
+# Definition of Done
 
-### 1. <원인 1>
-### 2. <원인 2>
-### 3. <원인 3>
-
-## 영향
-
-## 이번에 수정한 내용
-
-### 1. <수정한 문서 1>
-### 2. <수정한 문서 2>
-
-## 재발 방지 규칙
-
-## 체크리스트
-
-- [ ] ...
-
-## 결론
-```
-
-## 작성 규칙
-
-1. 변명하지 않는다.
-2. 사용자 판단이 맞으면 명확히 인정한다.
-3. “왜 발생했는지”와 “무엇을 바꿨는지”를 분리해서 쓴다.
-4. 추상적으로 쓰지 말고, 수정한 파일명을 명시한다.
-5. 재발 방지 규칙은 실제 작업 절차로 써야 한다.
-6. 체크리스트는 다음 작업 때 그대로 재사용 가능해야 한다.
-7. 문서는 UTF-8로 저장한다.
-8. 아래 상황이 발생하면 이 스킬을 적용한다.
-   - 사용자 기대와 실제 동작 불일치, 스킬·지침 미준수 사례가 발생한 경우
-   - 사용자가 규칙 미준수, 기대와 실제 동작 불일치, 재발 방지 기록을 요구한 경우
-   - 사용자 지적이 없더라도 스킬·전역 지침·작업 규칙 수정 이유를 자발적으로 이력화해야 하는 경우
-   - 동일 문제 추적을 위해 날짜별 히스토리 문서가 필요한 경우
-9. 스킬 문서, 전역 지침, 작업 규칙을 수정하기 시작한 시점에 history 기록 대상 여부를 먼저 판단한다. 판단 기준은 아래 규칙 10을 따른다.
-10. 아래 항목 중 하나라도 해당하면 같은 날의 `history/skill_YYYYMMDD.md`를 바로 만들고 작업을 이어간다.
-   - 스킬 목록 추가, 삭제, 이름 변경
-   - 스킬 설명 변경
-   - 경로 기준 변경
-   - 정합성 규칙 추가 또는 수정
-   - 사용자 지적으로 절차 누락이 드러난 경우
-11. history 문서는 최종 마무리 단계로 미루지 않는다. 사건이 확정되면 수정 작업 도중이라도 먼저 생성한다.
-12. 최종 보고 전에 `오늘 수정한 규칙 문서 목록`과 `오늘 생성한 history 문서`를 대조해 누락 여부를 다시 확인한다.
-13. history 기록 의무와 판단 기준의 단일 원본은 이 문서로 본다. 다른 문서에는 요약이나 참조만 두고, 같은 내용을 독립 규칙으로 다시 정의하지 않는다.
-
-## 작업 절차
-
-1. 사용자가 지적한 기대-실제 불일치 내용을 한 줄로 요약한다.
-2. history 기록 대상인지 먼저 판정한다.
-3. 대상이면 `history/skill_YYYYMMDD.md` 파일을 먼저 만든다.
-4. 어떤 규칙을 놓쳤는지 확인한다.
-5. 관련 문서(전역 지침, 스킬, 작업 규칙)를 수정한다.
-6. history 문서에 원인, 수정 내용, 재발 방지 규칙을 기록한다.
-7. 규칙 문서를 수정한 경우에는 교차 검토를 시도하고, 결과는 `claude-review.md` 형식으로 별도로 보고한다.
-8. 최종 보고 전에 history 문서 생성 여부를 다시 확인한다.
-
-## 금지 사항
-
-1. “실수였다”만 쓰고 끝내지 않는다.
-2. 수정 파일명을 생략하지 않는다.
-3. 재발 방지 규칙 없이 사건 요약만 남기지 않는다.
-4. 같은 내용을 여러 문서에 중복 정의할 때는 원본 문서를 명시하지 않은 채 복제하지 않는다.
-5. 규칙 문서를 수정하고도 같은 날 history 문서를 만들지 않은 채 종료하지 않는다.
-
-## 산출물
-
-- `history/skill_YYYYMMDD.md`
-- 수정된 규칙 문서 목록
-- 필요 시 교차 검토 결과
+## Verification
+- The checks in `## Daily History Trigger Rules` are completed before rule-document edits.
+- The required outputs in `## Outputs` are produced according to trigger results.
+- The content requirements in `## Required Daily History Content` are satisfied when daily history is created.
+- The writing constraints in `## Recording Rules` are satisfied.
+- The language constraints in `## Skill-Scoped History Language Rule` are satisfied.
+- The execution and reporting behavior in `## Cross-Review Requirement Rule` is satisfied.
