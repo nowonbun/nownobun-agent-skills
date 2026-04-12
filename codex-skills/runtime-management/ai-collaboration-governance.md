@@ -13,12 +13,12 @@ description: Agents coordinating Codex and Claude must enforce deterministic tim
 
 ## Source of Truth
 - This document is the single source of truth for Claude collaboration runtime controls.
-- ../tool-usage-management/claude-cross-review-protocol.md is the single source of truth for cross-review log fields and review-output format.
-- `D:/work/nowonbun-harness/CLAUDE.md` is the single source of truth for review policy profile content.
+- `claude-cross-review-protocol` is the single source of truth for cross-review log fields and review-output format.
+- `CLAUDE` is the single source of truth for review policy profile content.
 
 ## Path Resolution Rules
-- You must resolve the review policy path as `D:/work/nowonbun-harness/CLAUDE.md`.
-- When `D:/work/nowonbun-harness/CLAUDE.md` is unreadable or missing, you must stop execution and report `cross-review: blocked (reason: review policy path unavailable)`.
+- You must resolve the review policy path as `CLAUDE`.
+- When `CLAUDE` is unreadable or missing, you must stop execution and report `cross-review: blocked (reason: review policy path unavailable)`.
 
 ## Request Classification Rules
 - You must classify a request as heavy when at least one condition is true:
@@ -33,9 +33,9 @@ description: Agents coordinating Codex and Claude must enforce deterministic tim
 - Before every heavy request, you must run a `nowonbun_claude` responsiveness check that expects `OK` as the exact output.
 - When either healthcheck does not complete within 5 minutes, you must stop heavy requests and start timeout fallback flow.
 
-## CLAUDE.md Profile Injection Rules
-- You must extract the review profile block between <!-- REVIEW_PROFILE:START --> and <!-- REVIEW_PROFILE:END --> from `D:/work/nowonbun-harness/CLAUDE.md` when the markers exist.
-- When the review profile markers do not exist, you must derive the review profile from the current `CLAUDE.md` sections that define review position, core review objectives, primary review concerns, review output expectations, review decision guidance, encoding and document review rules, and prohibited review behavior.
+## CLAUDE Profile Injection Rules
+- You must extract the review profile block between <!-- REVIEW_PROFILE:START --> and <!-- REVIEW_PROFILE:END --> from `CLAUDE` when the markers exist.
+- When the review profile markers do not exist, you must derive the review profile from the current `CLAUDE` sections that define review position, core review objectives, primary review concerns, review output expectations, review decision guidance, encoding and document review rules, and prohibited review behavior.
 - You must inject only the extracted or derived review profile into `mcp_servers.nowonbun_claude` requests.
 - When profile extraction and profile derivation both fail or produce empty content, you must stop execution and report missing profile input.
 - When extracted profile length exceeds 1200 characters, you must compress by keeping this priority order:
@@ -75,28 +75,28 @@ description: Agents coordinating Codex and Claude must enforce deterministic tim
 
 ## Logging Delegation Rules
 - You must record timeout notices with timestamp, attempted request summary, timeout count, and fallback decision.
-- You must delegate Claude Collaboration Log field format to `../tool-usage-management/claude-cross-review-protocol.md`.
+- You must delegate Claude Collaboration Log field format to `claude-cross-review-protocol`.
 
 # Must NOT
 
 ## Prohibited Runtime Behavior
-- You must not inject full CLAUDE.md content into one `mcp_servers.nowonbun_claude` request.
+- You must not inject full CLAUDE content into one `mcp_servers.nowonbun_claude` request.
 - You must not skip implementation or review just because timeout occurred.
 - You must not retry immediately with identical conditions after timeout or error.
-- You must not redefine cross-review log schema that belongs to `claude-cross-review-protocol.md`.
+- You must not redefine cross-review log schema that belongs to `claude-cross-review-protocol`.
 
 # Flow
 
 ## Runtime Control Flow
-1. Resolve CLAUDE.md path and classify request as heavy or light.
+1. Resolve CLAUDE path and classify request as heavy or light.
 2. Run healthchecks for heavy requests.
-3. Extract review profile block from `CLAUDE.md`.
+3. Extract review profile block from `CLAUDE`.
 4. Validate prompt-size limits and request scope.
 5. When limits are exceeded, split into investigation, implementation, and review stages with required handoff structures.
 6. Run `mcp_servers.nowonbun_claude` request.
 7. If timeout occurs, apply cooldown and timeout fallback rules.
 8. If repeated timeout occurs in the same call chain, switch to two-session fallback flow.
-9. Record timeout notice and delegate review-log schema to `claude-cross-review-protocol.md`.
+9. Record timeout notice and delegate review-log schema to `claude-cross-review-protocol`.
 
 # Definition of Done
 
@@ -104,7 +104,7 @@ description: Agents coordinating Codex and Claude must enforce deterministic tim
 - Rules in ## Path Resolution Rules are satisfied before runtime execution.
 - Rules in ## Request Classification Rules are satisfied before healthcheck decision.
 - Rules in ## Timeout and Healthcheck Rules are satisfied before heavy requests.
-- Rules in ## CLAUDE.md Profile Injection Rules are satisfied for each invocation.
+- Rules in ## CLAUDE Profile Injection Rules are satisfied for each invocation.
 - Rules in ## Request Size Control Rules and ## Split-Flow Handoff Rules are satisfied or split flow is applied.
 - Rules in ## Timeout Fallback Rules and ## Two-Session Fallback Flow Rules are satisfied for timeout cases.
 - Rules in ## Logging Delegation Rules are satisfied.

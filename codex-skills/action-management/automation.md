@@ -12,7 +12,7 @@ description: Engineers designing or improving automation must use this skill to 
 - You must evaluate automation as an operating system with control and recovery, not as a one-off script.
 
 ## Source of Truth
-- This document is the single source of truth for automation-design structure in `codex-skills/action-management/automation.md`.
+- This document is the single source of truth for automation-design structure in `automation`.
 
 ## Value and Suitability Rules
 - You must evaluate whether automation reduces operating cost, error rate, or response time before implementation.

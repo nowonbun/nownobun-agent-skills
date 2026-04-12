@@ -12,8 +12,8 @@ description: Engineers using GitHub MCP must use this skill to separate GitHub A
 - You must treat GitHub MCP as remote GitHub API access, not as a replacement for local git CLI commit and push operations.
 
 ## Source of Truth
-- This document is the single source of truth for GitHub MCP usage rules in `codex-skills/tool-usage-management/github-mcp.md`.
-- `D:/work/nowonbun-harness/AGENTS.md` and `codex-skills/runtime-management/work-runtime.md` are the single source of truth for shared MCP pre-validation and stop conditions.
+- This document is the single source of truth for GitHub MCP usage rules in `github-mcp`.
+- `AGENTS` and `work-runtime` are the single source of truth for shared MCP pre-validation and stop conditions.
 
 ## Operation Boundary Rules
 - You must use git CLI for local staging, commit, diff, and push operations.

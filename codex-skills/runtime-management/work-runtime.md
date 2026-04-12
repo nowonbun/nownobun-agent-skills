@@ -3,7 +3,7 @@
 ## 1) Trigger-Collision Handling
 - Exact trigger phrase matches must take precedence over non-exact or inferred matches.
 - If two or more workflows define the same exact trigger phrase, execution must stop and a Stop-condition Confirmation Request must be issued.
-- A workflow that requires a path-specific trigger must not run when the resolved target path falls outside the governed folder defined by `AGENTS.md`.
+- A workflow that requires a path-specific trigger must not run when the resolved target path falls outside the governed folder defined by `AGENTS`.
 
 ## 2) MCP Pre-validation
 - Before any MCP tool call, the workflow must verify the source-of-truth file, ID, URL, or target reference required by that workflow.

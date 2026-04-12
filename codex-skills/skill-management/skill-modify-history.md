@@ -12,8 +12,8 @@ description: Agents revising skill or governance documents after expectation mis
 - You must apply this document to history-record obligations and creation-time criteria, not to skill markdown format design.
 
 ## Source of Truth
-- This document is the single source of truth for history-record obligations and day-based creation criteria.
-- `skill-create-rule.md` is the single source of truth for skill-document structure, frontmatter, and companion-artifact requirements.
+- This document governs history-record creation obligations, required content sections, and day-based creation criteria; it does not govern skill-document markdown structure, frontmatter format, or companion-artifact requirements.
+- `skill-create-rule` is the single source of truth for skill-document structure, frontmatter, and companion-artifact requirements; consult it when deciding what the skill document itself must contain, not for history-record creation timing or content.
 
 ## History Artifact Types
 - `daily history` means `history/skill_YYYYMMDD.md`.

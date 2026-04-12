@@ -13,9 +13,9 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 
 ## Source of Truth
 - This document is the single source of truth for Claude cross-review invocation, normalization, and reporting format.
-- `../runtime-management/ai-collaboration-governance.md` is the single source of truth for Claude collaboration runtime controls, timeout handling, fallback flow, and prompt-size control.
-- `../skill-management/skill-modify-history.md` is the single source of truth for history-record obligations when rule documents are revised.
-- `D:/work/nowonbun-harness/CLAUDE.md` is the single source of truth for review-policy profile content and review priorities.
+- `ai-collaboration-governance` is the single source of truth for Claude collaboration runtime controls, timeout handling, fallback flow, and prompt-size control.
+- `skill-modify-history` is the single source of truth for history-record obligations when rule documents are revised.
+- `CLAUDE` is the single source of truth for review-policy profile content and review priorities.
 
 ## Source Availability Rules
 - Before invocation, you must verify readability of every source-of-truth document required for the current review step.
@@ -30,8 +30,8 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 - Before invoking Claude, you must define exclusion scope.
 - Before invoking Claude, you must define agreed-items baseline that can be omitted from review output.
 - Before invoking Claude, you must confirm that all target paths are readable.
-- Before invoking Claude, you must confirm readability of `../runtime-management/ai-collaboration-governance.md`.
-- Before invoking Claude, you must confirm readability of `D:/work/nowonbun-harness/CLAUDE.md`.
+- Before invoking Claude, you must confirm readability of `ai-collaboration-governance`.
+- Before invoking Claude, you must confirm readability of `CLAUDE`.
 - When review-policy source verification fails, you must stop cross-review and record `cross-review: blocked (reason: review policy unavailable)`.
 - When runtime-governance source verification fails, you must stop cross-review and record `cross-review: blocked (reason: runtime governance unavailable)`.
 - When at least one target path is unreadable, you must stop cross-review and record `cross-review: blocked (reason: unreadable path)`.
@@ -53,10 +53,10 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 - You must instruct Claude to return NG-only output and omit agreed items without new risk.
 - You must record invocation timestamp in ISO 8601 format.
 - You must record input summary for each invocation.
-- You must use the review-policy priorities defined in `D:/work/nowonbun-harness/CLAUDE.md` and must not substitute another review-policy file.
-- You must follow timeout, fallback, and prompt-size controls defined in `../runtime-management/ai-collaboration-governance.md`.
+- You must use the review-policy priorities defined in `CLAUDE` and must not substitute another review-policy file.
+- You must follow timeout, fallback, and prompt-size controls defined in `ai-collaboration-governance`.
 - You must invoke Claude through `mcp_servers.nowonbun_claude` and must not substitute CLI entry points inside this harness.
-- When Claude invocation fails because of timeout, transport failure, or MCP error, you must apply retry and fallback rules from `../runtime-management/ai-collaboration-governance.md`.
+- When Claude invocation fails because of timeout, transport failure, or MCP error, you must apply retry and fallback rules from `ai-collaboration-governance`.
 
 ## Review Normalization Rules
 - You must normalize each Claude finding into these fields: `status`, `severity`, `finding`, `evidence`, `recommendation`, and `decision`.
@@ -117,7 +117,7 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 4. Verify runtime-governance readability and apply its prompt-size and timeout controls before invocation.
 5. If a required source document or target path is unreadable, stop and record `cross-review: blocked` with reason.
 6. Invoke Claude through `mcp_servers.nowonbun_claude` with one objective and explicit NG-only instruction.
-7. If invocation fails, apply retry and fallback rules from `../runtime-management/ai-collaboration-governance.md`.
+7. If invocation fails, apply retry and fallback rules from `ai-collaboration-governance`.
 8. Normalize Claude findings into required fields and allowed values.
 9. Verify evidence for each finding and mark unverifiable items as `unverified`.
 10. Decide adoption status for each finding and record reasons.

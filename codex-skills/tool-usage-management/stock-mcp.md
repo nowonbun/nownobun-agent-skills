@@ -12,8 +12,8 @@ description: Engineers using the StockSearcher MCP server must use this skill to
 - You must choose the tool based on the exact data need instead of reusing one tool for every stock question.
 
 ## Source of Truth
-- This document is the single source of truth for StockSearcher MCP usage rules in `codex-skills/tool-usage-management/stock-mcp.md`.
-- `D:/work/nowonbun-harness/AGENTS.md` and `codex-skills/runtime-management/work-runtime.md` are the single source of truth for shared MCP validation and stop conditions.
+- This document is the single source of truth for StockSearcher MCP usage rules in `stock-mcp`.
+- `AGENTS` and `work-runtime` are the single source of truth for shared MCP validation and stop conditions.
 
 ## Tool Selection Rules
 - You must use `list_stocks` when the task is to discover stock codes or names by market.

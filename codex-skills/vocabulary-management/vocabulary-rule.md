@@ -8,7 +8,7 @@ description: Agents and authors must use this global vocabulary baseline to inte
 # Must
 
 ## Scope
-- You must apply this document to term and strength interpretation in `global_instructions.md`, `CLAUDE.md`, `AGENTS.md`, and `SKILL.md`-family documents.
+- You must apply this document to term and strength interpretation in `global_instructions`, `CLAUDE`, `AGENTS`, and `SKILL.md`-family documents.
 - `SKILL.md`-family means the root `SKILL.md` file and all companion files explicitly referenced from that `SKILL.md`.
 - You must apply this document before task-intent interpretation, workflow trigger interpretation, and write-action decisions.
 - All paths in this document are project-root-relative paths unless explicitly marked as absolute paths.
@@ -19,9 +19,9 @@ description: Agents and authors must use this global vocabulary baseline to inte
 
 ## Source of Truth
 - This document is the single source of truth for vocabulary and rule-strength interpretation.
-- `constitution-rule.md` is the single source of truth for constitution-authoring boundaries.
-- `skill-create-rule.md` is the single source of truth for skill-document format constraints.
-- `skill-modify-history.md` is the single source of truth for rationale/history recording operations.
+- `constitution-rule` is the single source of truth for constitution-authoring boundaries.
+- `skill-create-rule` is the single source of truth for skill-document format constraints.
+- `skill-modify-history` is the single source of truth for rationale/history recording operations.
 
 ## Registry Control
 - You must maintain the active registry at `harness/codex-harness/vocabulary-management/vocabulary-registry.md`.
@@ -52,8 +52,8 @@ description: Agents and authors must use this global vocabulary baseline to inte
 - If relative dates are used, you must convert them to absolute dates before final decision and reporting.
 
 ## Priority Resolution
-- When interpretation conflicts occur, you must apply the priority model defined in `constitution-rule.md` `# Must > ## Priority Model`.
-- You must treat the priority order as `global_instructions.md` > `AGENTS.md` unless a higher-layer delegation explicitly overrides it.
+- When interpretation conflicts occur, you must apply the priority model defined in `constitution-rule` `# Must > ## Priority Model`.
+- You must treat the priority order as `global_instructions` > `AGENTS` unless a higher-layer delegation explicitly overrides it.
 
 ## History Path
 - The configured history path for this skill is `history/codex-harness/vocabulary-management/vocabulary-rule/`.

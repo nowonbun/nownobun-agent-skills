@@ -82,6 +82,7 @@ description: <One sentence describing what it does and when to apply it>
 - You must keep explicit rule text instead of reference-only wording when either of the following is true:
   - Pass/fail cannot be evaluated from the reference alone.
   - Required actor, condition, or failure handling cannot be identified from the reference alone.
+- When referencing another skill or governed document within rule text, you must use the frontmatter `name` value, not a file path or filename with extension.
 
 ## Language and Companion Documentation
 - When creating or revising skill documents, you must write all rule content in English.
@@ -101,11 +102,15 @@ description: <One sentence describing what it does and when to apply it>
 - If at least one required artifact is missing, you must stop completion reporting and create the missing artifact first.
 
 ## Source of Truth
-- This document is the single source of truth for skill document writing format and meaning-preservation standards.
-- `skill-governance-rule.md` is the single source of truth for governance tiers, risk triggers, and strict-vs-baseline control rules.
-- `skill-modify-history.md` is the single source of truth for history recording obligations and creation-time criteria.
-- `claude-cross-review-protocol.md` is the single source of truth for cross-review invocation and reporting format.
-- `global_instructions.md` is the single source of truth for global response principles and user profile.
+- Each self-declaration must state what this document governs and explicitly what it does not govern.
+- Each external reference must state: the document, the decision it resolves, and why that judgment belongs there and not in this document.
+- Must not write an entry that names a document and topic without stating a scope boundary or decision context.
+- The section must function as a conflict-resolution guide: a reader with an ambiguous judgment must be able to identify which document to consult and why.
+- This document governs skill-document writing format, section structure, rule-strength vocabulary, and meaning-preservation constraints; it does not govern governance tiers, risk triggers, or strict-vs-baseline control decisions.
+- `skill-governance-rule` is the single source of truth for governance tier assignment and strict-trigger conditions; consult it when deciding approval requirements or risk classification, not for format or structure questions.
+- `skill-modify-history` is the single source of truth for history-record creation obligations and day-based criteria; consult it when deciding whether a revision requires a new history file, not for what the skill document itself must contain.
+- `claude-cross-review-protocol` is the single source of truth for cross-review invocation format and output schema; consult it when a review output must conform to a defined log structure, not for how to write skill rules.
+- `global_instructions` is the single source of truth for global response principles and user profile; it takes priority over all other documents when conflicts arise.
 
 # Must NOT
 
@@ -155,8 +160,8 @@ description: <One sentence describing what it does and when to apply it>
 - If `## Monitoring` does not exist, it does not conflict with non-applicability conditions in `## Structure`.
 - If PlantUML is used, it follows application conditions and text-support explanation criteria in `## Structure`.
 - If PlantUML is not used, it does not conflict with non-applicability conditions in `## Structure`.
-- Rules requiring a single source of truth specify document name and scope.
-- Rule strength, condition-first writing, exception handling, and reference-substitution rules follow `Rule Writing` criteria.
+- Each Source of Truth entry states scope boundary and, for external references, the decision context and reason for delegation.
+- Rule strength, condition-first writing, exception handling, reference-substitution, and skill-reference naming rules follow `Rule Writing` criteria.
 - Rules in `Language and Companion Documentation` are satisfied, including Korean rule authoring and Korean readme placement.
 - History file language follows the latest history file in the same folder, or defaults to Korean when no prior history file exists.
 - Rules in `History Recording` are satisfied, including the history path pattern and per-skill path placement.

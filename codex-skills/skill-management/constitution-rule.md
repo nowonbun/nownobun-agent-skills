@@ -1,6 +1,6 @@
 ---
 name: constitution-rule
-description: Authors who create or revise global_instructions.md as the primary constitution target and align AGENTS.md must apply this rule to define priority, prohibition, and operation boundaries.
+description: Authors who create or revise global_instructions as the primary constitution target and align AGENTS must apply this rule to define priority, prohibition, and operation boundaries.
 ---
 
 # Constitution Rule
@@ -8,17 +8,17 @@ description: Authors who create or revise global_instructions.md as the primary 
 # Must
 
 ## Scope
-- You must apply this document when creating or revising `global_instructions.md` or `AGENTS.md`.
+- You must apply this document when creating or revising `global_instructions` or `AGENTS`.
 - You must treat this document as a content-governance rule for constitution documents, not as a markdown-format rule.
 
 ## Target Documents
-- You must define system-level identity, global principles, response principles, and non-negotiable safety rules in `global_instructions.md`.
-- You must define repository or workspace execution triggers, folder roles, and task-operational rules in `AGENTS.md`.
+- You must define system-level identity, global principles, response principles, and non-negotiable safety rules in `global_instructions`.
+- You must define repository or workspace execution triggers, folder roles, and task-operational rules in `AGENTS`.
 
 ## Constitution Layers
 - You must define exactly two constitution layers: global and workspace.
-- You must map `global_instructions.md` to the global layer.
-- You must map `AGENTS.md` to the workspace layer.
+- You must map `global_instructions` to the global layer.
+- You must map `AGENTS` to the workspace layer.
 
 ## Global Principles
 - You must write global principles as deterministic rules that can be validated from execution logs or file outputs.
@@ -29,7 +29,7 @@ description: Authors who create or revise global_instructions.md as the primary 
 
 ## Priority Model
 - You must define one closed priority order across constitution documents.
-- You must set priority as `global_instructions.md` > `AGENTS.md` when no stricter repository rule is declared.
+- You must set priority as `global_instructions` > `AGENTS` when no stricter repository rule is declared.
 - You must declare one conflict-resolution rule for equal-priority collisions.
 - You must declare one fallback rule for missing instructions.
 
@@ -71,7 +71,7 @@ description: Authors who create or revise global_instructions.md as the primary 
 - You must read the current target file state before each write attempt.
 - You must treat re-running the same instruction on an already compliant file as `no-op`.
 - You must report `no-op` when no file change is required.
-- You must run revision flow instead of creation flow when `global_instructions.md` already exists.
+- You must run revision flow instead of creation flow when `global_instructions` already exists.
 - You must not overwrite user-added content outside the declared instruction scope.
 - You must request explicit user approval when re-run changes would touch out-of-scope content.
 
@@ -82,10 +82,10 @@ description: Authors who create or revise global_instructions.md as the primary 
 - You must define post-action reporting format for each MCP write action.
 
 ## Source of Truth
-- This document is the single source of truth for constitution-document content boundaries, priority rules, and operational rule coverage.
-- `skill-create-rule.md` is the single source of truth for structure and writing-format constraints of skill documents.
-- `skill-governance-rule.md` is the single source of truth for governance-tier and strict-trigger controls.
-- `skill-modify-history.md` is the single source of truth for history-record policy.
+- This document governs constitution-document content boundaries, layer assignments, priority rules, and operational rule coverage for `global_instructions` and `AGENTS`; it does not govern skill-document authoring format, governance tiers, or per-revision history obligations.
+- `skill-create-rule` is the single source of truth for structure and writing-format constraints of skill documents; consult it when deciding how to format or structure a skill document, not for constitution-layer priority questions.
+- `skill-governance-rule` is the single source of truth for governance-tier definitions and strict-trigger controls; consult it when deciding whether a skill requires strict approval, not for constitution authoring questions.
+- `skill-modify-history` is the single source of truth for history-record creation obligations and day-based criteria; consult it when deciding whether a rule-document revision requires a history file, not for constitution content boundaries.
 
 # Must NOT
 
@@ -94,9 +94,9 @@ description: Authors who create or revise global_instructions.md as the primary 
 - You must not define priority words such as `important` or `higher` without numeric or ordered ranking.
 
 ## Scope Mixing
-- You must not place workspace-trigger details in `global_instructions.md`.
-- You must not place global identity or universal behavior principles only in `AGENTS.md`.
-- You must not duplicate the same rule text across `global_instructions.md` and `AGENTS.md`.
+- You must not place workspace-trigger details in `global_instructions`.
+- You must not place global identity or universal behavior principles only in `AGENTS`.
+- You must not duplicate the same rule text across `global_instructions` and `AGENTS`.
 
 ## Priority Omission
 - You must not publish constitution documents without an explicit conflict-resolution order.
@@ -112,10 +112,10 @@ description: Authors who create or revise global_instructions.md as the primary 
 ## Constitution Authoring
 1. Verify availability of required source-of-truth files before rule authoring.
 2. Classify each target rule into global or workspace layer.
-3. Check whether `global_instructions.md` exists before selecting create or revision flow.
-4. Run global create flow when `global_instructions.md` is missing.
-5. Run global revision flow when `global_instructions.md` already exists.
-6. Assign each classified rule to `global_instructions.md` or `AGENTS.md`.
+3. Check whether `global_instructions` exists before selecting create or revision flow.
+4. Run global create flow when `global_instructions` is missing.
+5. Run global revision flow when `global_instructions` already exists.
+6. Assign each classified rule to `global_instructions` or `AGENTS`.
 7. Define priority order, conflict resolution, and fallback behavior.
 8. Define prohibited rules and enforcement behavior per layer.
 9. Define AGENTS folder roles and workflow trigger rules.
@@ -123,12 +123,12 @@ description: Authors who create or revise global_instructions.md as the primary 
 11. Verify cross-document consistency and remove duplicated rule text.
 
 ## Global Instructions Create Flow
-1. Create `global_instructions.md` with constitution layer, principles, priority model, and prohibition set.
+1. Create `global_instructions` with constitution layer, principles, priority model, and prohibition set.
 2. Validate that required global sections are present before proceeding to dependent documents.
 3. Stop and report failure with required workflow report fields when required global sections are missing.
 
 ## Global Instructions Revision Flow
-1. Diff the current `global_instructions.md` content against requested changes.
+1. Diff the current `global_instructions` content against requested changes.
 2. Apply targeted edits only to requested or policy-required sections.
 3. Preserve unaffected sections during revision.
 4. Stop and request user approval when revision scope expands beyond the request.
@@ -148,11 +148,11 @@ description: Authors who create or revise global_instructions.md as the primary 
 - The document contains `## Verification` under `# Definition of Done`.
 - Each rule sentence uses explicit force terms (`must`, `must not`, or equivalent prohibition language).
 - Priority order, conflict resolution, and fallback behavior are explicitly defined.
-- Coverage for `global_instructions.md` and `AGENTS.md` is explicitly defined.
+- Coverage for `global_instructions` and `AGENTS` is explicitly defined.
 - AGENTS folder-role, trigger, order, failure, and re-run requirements are explicitly defined.
 - Skill and MCP operation rules include source checks, parameter validation, and reporting obligations.
 - Prohibited behaviors and enforcement behavior are explicitly defined.
-- Create and revision flows for `global_instructions.md` are explicitly separated.
+- Create and revision flows for `global_instructions` are explicitly separated.
 - Execution stop conditions are explicitly defined.
 - Re-run and overwrite policy is explicitly defined.
 - Workflow failure reports and stop-condition confirmation requests follow defined report formats.

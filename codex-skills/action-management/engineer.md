@@ -12,7 +12,7 @@ description: Engineers solving software problems must use this skill to define t
 - You must treat the task as problem solving with verification, not as immediate patch writing.
 
 ## Source of Truth
-- This document is the single source of truth for engineering-analysis structure in `codex-skills/action-management/engineer.md`.
+- This document is the single source of truth for engineering-analysis structure in `engineer`.
 
 ## Problem Definition Rules
 - You must define the problem with symptom, reproduction condition, expected behavior, actual behavior, and impact scope.

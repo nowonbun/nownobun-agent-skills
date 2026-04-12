@@ -24,8 +24,8 @@ description: Agents that need to run Claude MCP cross-review must use this runti
 - When no actionable plan exists yet, you must stop review startup and report `cross-review: blocked (reason: no actionable plan)`.
 
 ## Source of Truth
-- `../tool-usage-management/claude-cross-review-protocol.md` is the single source of truth for Claude invocation structure, mandatory review axes, finding normalization, and collaboration log format.
-- `../skill-management/skill-modify-history.md` is the single source of truth for history-record obligations when revising this runtime skill or the protocol.
+- `claude-cross-review-protocol` is the single source of truth for Claude invocation structure, mandatory review axes, finding normalization, and collaboration log format.
+- `skill-modify-history` is the single source of truth for history-record obligations when revising this runtime skill or the protocol.
 
 ## Local Preflight Rules
 - Before invoking Claude MCP, you must verify that `mcp_servers.nowonbun_claude` is available in the current environment.
@@ -45,17 +45,17 @@ description: Agents that need to run Claude MCP cross-review must use this runti
 - You must pass file paths and review intent, and must not paste full diffs or full file contents into the MCP request when direct file reading is sufficient.
 
 ## Execution Rules
-- After local preflight succeeds, you must follow `../tool-usage-management/claude-cross-review-protocol.md` for the actual Claude invocation and reporting.
+- After local preflight succeeds, you must follow `claude-cross-review-protocol` for the actual Claude invocation and reporting.
 - You must use `mcp_servers.nowonbun_claude` as the execution entry point for this harness.
-- When invocation failure occurs, you must follow the retry and blocked-state rules defined in `../tool-usage-management/claude-cross-review-protocol.md`.
+- When invocation failure occurs, you must follow the retry and blocked-state rules defined in `claude-cross-review-protocol`.
 - After each `plan-review`, `source-review`, `result-review`, or `re-review`, you must report the review result to the user in the active conversation.
 - The user-facing report must include `phase`, `cross-review status`, `summary`, `key findings`, and `next action`.
 
 # Must NOT
 
 ## Prohibited Behavior
-- You must not redefine finding normalization rules that already belong to `../tool-usage-management/claude-cross-review-protocol.md`.
-- You must not redefine collaboration log format that already belongs to `../tool-usage-management/claude-cross-review-protocol.md`.
+- You must not redefine finding normalization rules that already belong to `claude-cross-review-protocol`.
+- You must not redefine collaboration log format that already belongs to `claude-cross-review-protocol`.
 - You must not skip local MCP availability checks when this runtime skill is the selected execution entry.
 - You must not send full diff payloads or full file bodies through the MCP request when target files are locally readable.
 
@@ -66,7 +66,7 @@ description: Agents that need to run Claude MCP cross-review must use this runti
 2. Classify the review phase as `plan-review`, `source-review`, `result-review`, or `re-review`.
 3. Run the local MCP availability and responsiveness checks.
 4. Prepare the review objective, target paths, and document-integrity checks when applicable.
-5. Hand off execution to `../tool-usage-management/claude-cross-review-protocol.md`.
+5. Hand off execution to `claude-cross-review-protocol`.
 6. Report the result using the protocol-defined output and log format, and also provide the required user-facing conversation summary.
 
 # Definition of Done
@@ -76,6 +76,6 @@ description: Agents that need to run Claude MCP cross-review must use this runti
 - Review phase was classified before invocation.
 - Local MCP preflight succeeded before protocol handoff, or a blocked result was reported.
 - Text-document review objectives include UTF-8 integrity and text-preservation checks when applicable.
-- Invocation, normalization, and reporting rules were delegated to `../tool-usage-management/claude-cross-review-protocol.md` without duplicate local rule text.
+- Invocation, normalization, and reporting rules were delegated to `claude-cross-review-protocol` without duplicate local rule text.
 - User-facing review summary was reported for each mandatory review phase.
 - No prohibited behavior in `# Must NOT` occurred during execution.

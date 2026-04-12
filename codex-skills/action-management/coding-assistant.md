@@ -12,9 +12,9 @@ description: Engineers handling coding changes must use this skill to classify c
 - You must apply the same review discipline to documentation and configuration changes when they can affect execution behavior.
 
 ## Source of Truth
-- This document is the single source of truth for coding-change coordination in `codex-skills/action-management/coding-assistant.md`.
-- `../runtime-management/claude-review-runtime.md` is the single source of truth for Claude review runtime applicability, fallback, and execution handling.
-- `../tool-usage-management/claude-cross-review-protocol.md` is the single source of truth for Claude review output format and review-log schema.
+- This document is the single source of truth for coding-change coordination in `coding-assistant`.
+- `claude-review-runtime` is the single source of truth for Claude review runtime applicability, fallback, and execution handling.
+- `claude-cross-review-protocol` is the single source of truth for Claude review output format and review-log schema.
 
 ## Change Classification Rules
 - You must classify each request as non-destructive or destructive before implementation.
@@ -36,7 +36,7 @@ description: Engineers handling coding changes must use this skill to classify c
 - You must run `plan-review` before execution starts when an actionable plan exists.
 - You must run `source-review` after source changes exist and before completion reporting.
 - You must run `result-review` after execution results and verification evidence are available.
-- When Claude review is run, you must follow `../runtime-management/claude-review-runtime.md` for availability checks, fallback handling, and escalation behavior.
+- When Claude review is run, you must follow `claude-review-runtime` for availability checks, fallback handling, and escalation behavior.
 - When Claude review is unavailable or fails, you must switch to an explicit alternative verification flow instead of silently skipping review.
 
 ## Alternative Verification Rules

@@ -12,8 +12,8 @@ description: Engineers using the MariaDB MCP server must use this skill to verif
 - You must treat MariaDB MCP as a constrained database interface with explicit permission boundaries.
 
 ## Source of Truth
-- This document is the single source of truth for MariaDB MCP usage rules in `codex-skills/tool-usage-management/mariadb-mcp.md`.
-- `D:/work/nowonbun-harness/AGENTS.md` and `codex-skills/runtime-management/work-runtime.md` are the single source of truth for shared MCP validation and stop conditions.
+- This document is the single source of truth for MariaDB MCP usage rules in `mariadb-mcp`.
+- `AGENTS` and `work-runtime` are the single source of truth for shared MCP validation and stop conditions.
 
 ## Connection and Permission Rules
 - Before running SQL, you must verify server reachability or permission summary when scope or capability is relevant to the task.

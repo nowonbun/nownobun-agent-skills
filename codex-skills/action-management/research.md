@@ -12,7 +12,7 @@ description: Engineers analyzing a topic must use this skill to define the quest
 - You must structure the output for use in decisions, not only for summary.
 
 ## Source of Truth
-- This document is the single source of truth for research-structure rules in `codex-skills/action-management/research.md`.
+- This document is the single source of truth for research-structure rules in `research`.
 
 ## Question Definition Rules
 - You must define the question scope, time range, region, and required confidence level before collecting conclusions.

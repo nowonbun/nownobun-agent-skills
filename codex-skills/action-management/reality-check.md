@@ -12,7 +12,7 @@ description: Engineers challenging optimistic or biased judgments must use this 
 - You must correct judgment quality, not attack the user's intent.
 
 ## Source of Truth
-- This document is the single source of truth for reality-check structure in `codex-skills/action-management/reality-check.md`.
+- This document is the single source of truth for reality-check structure in `reality-check`.
 
 ## Framing Rules
 - You must identify the most fragile assumption before arguing about the conclusion.

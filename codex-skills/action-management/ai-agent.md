@@ -12,8 +12,8 @@ description: Engineers designing AI agents must use this skill to define operati
 - You must define the agent as an operating system for a task, not as a list of isolated features.
 
 ## Source of Truth
-- This document is the single source of truth for AI-agent design structure in `codex-skills/action-management/ai-agent.md`.
-- `coding-assistant.md` is the single source of truth for implementation-time collaboration, review, and change-reporting rules.
+- This document is the single source of truth for AI-agent design structure in `ai-agent`.
+- `coding-assistant` is the single source of truth for implementation-time collaboration, review, and change-reporting rules.
 
 ## Problem Definition Rules
 - You must define the operating problem before proposing architecture.
@@ -70,7 +70,7 @@ description: Engineers designing AI agents must use this skill to define operati
 4. Design the pipeline stages and per-stage contracts.
 5. Define LLM-call placement and tool/MCP contracts.
 6. Define state boundaries, observability, and verification scenarios.
-7. Hand off implementation-specific work to `coding-assistant.md` when coding changes are required.
+7. Hand off implementation-specific work to `coding-assistant` when coding changes are required.
 
 # Definition of Done
 

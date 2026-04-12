@@ -18,13 +18,13 @@ description: Agents or reviewers who audit skill documentation repositories for 
 - You must not treat example paths or placeholder paths as operational paths.
 
 ## Source of Truth
-- This document is the single source of truth for consistency-check procedure and pass/fail criteria for skill-document repositories.
-- `../../../global_instructions.md` is the single source of truth for global principles and safety boundaries.
-- `../../../AGENTS.md` is the single source of truth for workspace execution triggers and operational workflows.
-- `./constitution-rule.md` is the single source of truth for constitution-layer priority and conflict handling.
-- `./skill-create-rule.md` is the single source of truth for skill-document authoring format and per-skill history path pattern.
-- `./skill-governance-rule.md` is the single source of truth for governance-tier definitions and governance controls.
-- `./skill-modify-history.md` is the single source of truth for additional history-recording obligations and day-based history criteria.
+- This document governs consistency-check procedure, file-role classification, and pass/fail criteria for skill-document repositories; it does not govern skill authoring format, governance tier definitions, or history-record obligations.
+- `global_instructions` is the single source of truth for global principles and safety boundaries; consult it when a check finding touches a system-level safety boundary, not for skill-repository structure questions.
+- `AGENTS` is the single source of truth for workspace execution triggers and operational workflows; consult it when determining what triggers a check run, not for how to evaluate check results.
+- `constitution-rule` is the single source of truth for constitution-layer priority and conflict handling; consult it when a conflict involves constitution-layer precedence, not for skill-document format disputes.
+- `skill-create-rule` is the single source of truth for skill-document authoring format and per-skill history path pattern; consult it when evaluating whether a skill document's structure is compliant, not for governance tier or history-obligation decisions.
+- `skill-governance-rule` is the single source of truth for governance-tier definitions and governance controls; consult it when determining whether a skill's governance tier is correctly assigned, not for format or history-record questions.
+- `skill-modify-history` is the single source of truth for history-recording obligations and day-based history criteria; consult it when determining whether a required history file is missing, not for skill-document format questions.
 
 ## File and Role Validation
 - If a referenced file does not exist at the resolved path, you must record an error.
@@ -50,10 +50,10 @@ description: Agents or reviewers who audit skill documentation repositories for 
 - You must verify that overlapping rules declare a clear precedence source to preserve single-source-of-truth behavior.
 
 ## History and Traceability Validation
-- If a checked rule document was revised, you must verify that a corresponding history record exists under the history path policy defined in `./skill-create-rule.md` and `./skill-modify-history.md`.
+- If a checked rule document was revised, you must verify that a corresponding history record exists under the history path policy defined in `skill-create-rule` and `skill-modify-history`.
 - If required history evidence is missing, you must record a traceability error.
 - You must treat unverifiable items as `unverified`, not as pass.
-- You must use history records as the revision-tracking source, because frontmatter metadata is constrained by `./skill-create-rule.md`.
+- You must use history records as the revision-tracking source, because frontmatter metadata is constrained by `skill-create-rule`.
 
 ## Reporting Requirements
 - You must report findings with separated sections for verified facts, detected errors, ambiguity findings, cyclic-dependency findings, and unverified items.

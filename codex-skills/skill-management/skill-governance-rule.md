@@ -43,8 +43,8 @@ description: Authors who design or revise skill governance policies must apply t
 - `## History Recording` is mandatory in skill authoring regardless of governance tier.
 
 ## Source of Truth
-- This document is the single source of truth for governance tiers, strict triggers, and baseline-vs-strict control boundaries.
-- `skill-create-rule.md` is the single source of truth for skill document format and structure.
+- This document governs governance tier selection, strict trigger definitions, and baseline-vs-strict control boundaries; it does not govern skill-document markdown format, section structure, or history-record obligations.
+- `skill-create-rule` is the single source of truth for skill document format and structure; consult it when deciding how to write or structure a skill document, not for risk classification or approval requirement questions.
 
 # Must NOT
 
@@ -54,7 +54,7 @@ description: Authors who design or revise skill governance policies must apply t
 
 ## Scope Drift
 - You must not define markdown formatting requirements in this document.
-- You must not duplicate format/section layout rules that belong to `skill-create-rule.md`.
+- You must not duplicate format/section layout rules that belong to `skill-create-rule`.
 
 ## Over-Governance
 - You must not apply strict-only controls when no strict trigger is active.
@@ -67,7 +67,7 @@ description: Authors who design or revise skill governance policies must apply t
 2. Select governance tier by evaluating strict triggers.
 3. Write controls for the selected tier.
 4. Define verification for active controls.
-5. Check consistency with `skill-create-rule.md`.
+5. Check consistency with `skill-create-rule`.
 
 ## Governance Review
 1. Verify strict-trigger evaluation is reproducible.
@@ -81,4 +81,4 @@ description: Authors who design or revise skill governance policies must apply t
 - Strict trigger set is closed and unchanged.
 - Baseline and strict controls are explicitly separated.
 - Ambiguous governance labels are absent or explicitly defined.
-- Source-of-truth boundaries with `skill-create-rule.md` are explicit.
+- Source-of-truth boundaries with `skill-create-rule` are explicit.
