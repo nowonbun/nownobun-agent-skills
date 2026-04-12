@@ -1,15 +1,13 @@
 # mariadb-mcp 스킬 설명
 
 ## 목적
-- MariaDB MCP를 사용할 때 연결 범위, 권한 한계, SQL 안전 조건을 먼저 검증하도록 만든 스킬이다.
+- MariaDB MCP 사용 시 연결 범위, SQL 검증, read/write 권한 처리 규칙을 명확히 하기 위한 스킬이다.
 
 ## 핵심 규칙
-- 현재 MCP 권한 범위를 먼저 확인한다.
-- SQL은 한 번에 한 문장만 실행한다.
-- 파라미터가 섞이면 parameterized input을 우선한다.
-- 스키마나 테이블 이름은 증거 없이 단정하지 않는다.
-- 결과 보고에는 SQL 목적과 결과 의미를 같이 적는다.
+- 이 스킬은 연결 범위 확인, SQL 검증, read/write 권한 처리를 맡는다.
+- workspace trigger와 stop 조건은 `AGENTS`, 공통 MCP 검증과 보고 제어는 `work-runtime`이 맡는다.
+- SQL 유효성 판단과 워크플로 진입 허용 여부를 분리해야 한다.
 
 ## 사용 시 주의
-- 현재 권한이 read-only이면 write SQL을 시도하면 안 된다.
-- 스키마 suffix 규칙 같은 것은 실제 증거 없이는 `unverified`로 둬야 한다.
+- Source of Truth에는 데이터베이스 고유 판단과 공통 runtime 판단을 섞지 말아야 한다.
+- 권한 검증과 절차적 stop 조건은 각각 다른 문서에서 본다.

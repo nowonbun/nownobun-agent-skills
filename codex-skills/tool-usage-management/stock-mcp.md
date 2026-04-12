@@ -12,8 +12,9 @@ description: Engineers using the StockSearcher MCP server must use this skill to
 - You must choose the tool based on the exact data need instead of reusing one tool for every stock question.
 
 ## Source of Truth
-- This document is the single source of truth for StockSearcher MCP usage rules in `stock-mcp`.
-- `AGENTS` and `work-runtime` are the single source of truth for shared MCP validation and stop conditions.
+- This document governs market/date parameter validation, stock-tool selection, and stock-query intent reporting in `stock-mcp`; it does not govern shared workspace stop conditions, delegated runtime controls, or stock-analysis narrative structure.
+- `AGENTS` is the single source of truth for workspace execution triggers and workflow stop conditions; consult it when deciding whether a stock MCP task is allowed to proceed inside the current workspace workflow, not for market/date validation or stock-tool selection rules.
+- `work-runtime` is the single source of truth for shared MCP validation, shared stop conditions, and shared reporting controls delegated by AGENTS; consult it when deciding common runtime checks that apply before MCP execution, not for stock-specific parameter rules.
 
 ## Tool Selection Rules
 - You must use `list_stocks` when the task is to discover stock codes or names by market.
@@ -40,7 +41,6 @@ description: Engineers using the StockSearcher MCP server must use this skill to
 
 # Must NOT
 
-## Prohibited Stock MCP Behavior
 - You must not call `predict_rows` without both `market` and `as_of`.
 - You must not call `stock_data` without both `market` and `code`.
 - You must not assume unsupported markets beyond the ones confirmed by current MCP behavior.
@@ -48,7 +48,6 @@ description: Engineers using the StockSearcher MCP server must use this skill to
 
 # Flow
 
-## Execution Flow
 1. Identify whether the request is discovery, price history, prediction-date lookup, or prediction-row lookup.
 2. Select the matching stock MCP tool.
 3. Validate `market` and all required parameters for that tool.

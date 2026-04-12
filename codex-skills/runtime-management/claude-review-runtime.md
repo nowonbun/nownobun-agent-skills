@@ -24,8 +24,9 @@ description: Agents that need to run Claude MCP cross-review must use this runti
 - When no actionable plan exists yet, you must stop review startup and report `cross-review: blocked (reason: no actionable plan)`.
 
 ## Source of Truth
-- `claude-cross-review-protocol` is the single source of truth for Claude invocation structure, mandatory review axes, finding normalization, and collaboration log format.
-- `skill-modify-history` is the single source of truth for history-record obligations when revising this runtime skill or the protocol.
+- This document governs Claude review runtime entry conditions, review-phase applicability, local preflight checks, and protocol handoff behavior in `claude-review-runtime`; it does not govern Claude finding normalization, collaboration-log schema, or history-record creation criteria.
+- `claude-cross-review-protocol` is the single source of truth for Claude invocation structure, mandatory review axes, finding normalization, and collaboration log format; consult it when deciding how a review invocation must be structured and reported after runtime entry succeeds, not for phase applicability or local preflight decisions.
+- `skill-modify-history` is the single source of truth for history-record obligations when revising this runtime skill or the protocol; consult it when deciding whether and how a revision must be recorded in history artifacts, not for Claude review startup behavior.
 
 ## Local Preflight Rules
 - Before invoking Claude MCP, you must verify that `mcp_servers.nowonbun_claude` is available in the current environment.
@@ -52,16 +53,12 @@ description: Agents that need to run Claude MCP cross-review must use this runti
 - The user-facing report must include `phase`, `cross-review status`, `summary`, `key findings`, and `next action`.
 
 # Must NOT
-
-## Prohibited Behavior
 - You must not redefine finding normalization rules that already belong to `claude-cross-review-protocol`.
 - You must not redefine collaboration log format that already belongs to `claude-cross-review-protocol`.
 - You must not skip local MCP availability checks when this runtime skill is the selected execution entry.
 - You must not send full diff payloads or full file bodies through the MCP request when target files are locally readable.
 
 # Flow
-
-## Claude Review Entry Flow
 1. Decide the mandatory review phase sequence under `## Applicability Rules`.
 2. Classify the review phase as `plan-review`, `source-review`, `result-review`, or `re-review`.
 3. Run the local MCP availability and responsiveness checks.

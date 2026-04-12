@@ -12,8 +12,8 @@ description: Engineers designing AI agents must use this skill to define operati
 - You must define the agent as an operating system for a task, not as a list of isolated features.
 
 ## Source of Truth
-- This document is the single source of truth for AI-agent design structure in `ai-agent`.
-- `coding-assistant` is the single source of truth for implementation-time collaboration, review, and change-reporting rules.
+- This document governs AI-agent problem framing, decision-boundary definition, tool-contract definition, and verification-plan structure in `ai-agent`; it does not govern coding-change review flow, cross-review runtime execution, or repository-wide skill format rules.
+- `coding-assistant` is the single source of truth for implementation-time collaboration, review sequencing, and change-reporting decisions; consult it when an AI-agent design task moves into concrete code-change execution, not for agent-design structure decisions.
 
 ## Problem Definition Rules
 - You must define the operating problem before proposing architecture.

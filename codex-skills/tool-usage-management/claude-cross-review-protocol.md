@@ -12,10 +12,10 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 - You must apply this document to Claude cross-review invocation, review normalization, and review-log reporting.
 
 ## Source of Truth
-- This document is the single source of truth for Claude cross-review invocation, normalization, and reporting format.
-- `ai-collaboration-governance` is the single source of truth for Claude collaboration runtime controls, timeout handling, fallback flow, and prompt-size control.
-- `skill-modify-history` is the single source of truth for history-record obligations when rule documents are revised.
-- `CLAUDE` is the single source of truth for review-policy profile content and review priorities.
+- This document governs Claude cross-review invocation, review normalization, collaboration-log reporting, and NG/OK output rules in `claude-cross-review-protocol`; it does not govern runtime timeout controls, review-profile source content, or history-record creation criteria.
+- `ai-collaboration-governance` is the single source of truth for Claude collaboration runtime controls, timeout handling, fallback flow, and prompt-size control; consult it when deciding how to manage request size, retries, or timeout fallback, not for review-log schema decisions.
+- `skill-modify-history` is the single source of truth for history-record obligations when rule documents are revised; consult it when deciding whether review-related rule revisions require history artifacts, not for Claude invocation or normalization rules.
+- `CLAUDE` is the single source of truth for review-policy profile content and review priorities; consult it when deciding which review concerns and priorities govern the review itself, not for protocol output structure.
 
 ## Source Availability Rules
 - Before invocation, you must verify readability of every source-of-truth document required for the current review step.
@@ -100,7 +100,6 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 
 # Must NOT
 
-## Prohibited Review Behavior
 - You must not apply Claude suggestions directly without local evidence verification.
 - You must not merge `error` and `unverified` statuses into one status.
 - You must not use values outside the allowed sets defined in `## Review Normalization Rules`.
@@ -110,7 +109,6 @@ description: Agents that need Claude cross-review for changes must invoke Claude
 
 # Flow
 
-## Claude Cross-Review Flow
 1. Verify source-of-truth readability required for this run.
 2. Define review phase, objective, target paths, acceptance criteria, exclusion scope, and agreed-items baseline.
 3. Define mandatory review axes and add UTF-8 integrity checks when text documents are in scope.

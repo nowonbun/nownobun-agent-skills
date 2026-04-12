@@ -12,7 +12,7 @@ description: Engineers designing or improving automation must use this skill to 
 - You must evaluate automation as an operating system with control and recovery, not as a one-off script.
 
 ## Source of Truth
-- This document is the single source of truth for automation-design structure in `automation`.
+- This document governs automation value framing, execution-boundary definition, and recovery-structure design in `automation`; it does not govern governance-tier selection, document-format rules, or MCP-specific validation procedures.
 
 ## Value and Suitability Rules
 - You must evaluate whether automation reduces operating cost, error rate, or response time before implementation.

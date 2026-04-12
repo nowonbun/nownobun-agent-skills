@@ -103,8 +103,9 @@ description: <One sentence describing what it does and when to apply it>
 
 ## Source of Truth
 - Each self-declaration must state what this document governs and explicitly what it does not govern.
-- Each external reference must state: the document, the decision it resolves, and why that judgment belongs there and not in this document.
+- Each external reference must state: the document, the reusable decision boundary it resolves, and why that judgment belongs there and not in this document.
 - Must not write an entry that names a document and topic without stating a scope boundary or decision context.
+- Must not justify a Source of Truth entry with one-off examples, temporary exceptions, revision-local intent, or workflow-local context.
 - The section must function as a conflict-resolution guide: a reader with an ambiguous judgment must be able to identify which document to consult and why.
 - This document governs skill-document writing format, section structure, rule-strength vocabulary, and meaning-preservation constraints; it does not govern governance tiers, risk triggers, or strict-vs-baseline control decisions.
 - `skill-governance-rule` is the single source of truth for governance tier assignment and strict-trigger conditions; consult it when deciding approval requirements or risk classification, not for format or structure questions.
@@ -160,7 +161,8 @@ description: <One sentence describing what it does and when to apply it>
 - If `## Monitoring` does not exist, it does not conflict with non-applicability conditions in `## Structure`.
 - If PlantUML is used, it follows application conditions and text-support explanation criteria in `## Structure`.
 - If PlantUML is not used, it does not conflict with non-applicability conditions in `## Structure`.
-- Each Source of Truth entry states scope boundary and, for external references, the decision context and reason for delegation.
+- Each Source of Truth entry states scope boundary and, for external references, the reusable decision boundary, decision context, and reason for delegation.
+- Source of Truth entries do not rely on one-off examples, temporary exceptions, revision-local intent, or workflow-local context.
 - Rule strength, condition-first writing, exception handling, reference-substitution, and skill-reference naming rules follow `Rule Writing` criteria.
 - Rules in `Language and Companion Documentation` are satisfied, including Korean rule authoring and Korean readme placement.
 - History file language follows the latest history file in the same folder, or defaults to Korean when no prior history file exists.

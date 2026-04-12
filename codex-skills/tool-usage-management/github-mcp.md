@@ -12,8 +12,9 @@ description: Engineers using GitHub MCP must use this skill to separate GitHub A
 - You must treat GitHub MCP as remote GitHub API access, not as a replacement for local git CLI commit and push operations.
 
 ## Source of Truth
-- This document is the single source of truth for GitHub MCP usage rules in `github-mcp`.
-- `AGENTS` and `work-runtime` are the single source of truth for shared MCP pre-validation and stop conditions.
+- This document governs GitHub MCP target validation, API-versus-git responsibility separation, and GitHub write-action handling in `github-mcp`; it does not govern shared workspace stop conditions, delegated runtime controls, or general skill-document structure.
+- `AGENTS` is the single source of truth for workspace execution triggers and workflow stop conditions; consult it when deciding whether a GitHub MCP task is allowed to proceed inside the current workspace workflow, not for repository-target validation rules.
+- `work-runtime` is the single source of truth for shared MCP pre-validation, shared stop conditions, and shared reporting controls delegated by AGENTS; consult it when deciding shared runtime checks that apply before MCP execution, not for GitHub-specific ownership or target-ID rules.
 
 ## Operation Boundary Rules
 - You must use git CLI for local staging, commit, diff, and push operations.
@@ -37,7 +38,6 @@ description: Engineers using GitHub MCP must use this skill to separate GitHub A
 
 # Must NOT
 
-## Prohibited GitHub MCP Behavior
 - You must not describe git commit or git push as GitHub MCP actions.
 - You must not perform a GitHub MCP write with missing or mismatched repository identifiers.
 - You must not skip pre-read state checks when correctness depends on current issue, PR, branch, or file state.
@@ -45,7 +45,6 @@ description: Engineers using GitHub MCP must use this skill to separate GitHub A
 
 # Flow
 
-## Execution Flow
 1. Separate local git work from remote GitHub MCP work.
 2. Identify the exact repository, branch, issue, PR, comment, or file target.
 3. Read current GitHub state when required for correctness.

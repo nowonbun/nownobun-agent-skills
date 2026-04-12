@@ -1,28 +1,63 @@
 ---
 name: stock-analysis
-description: 주식 분석(기업, 재무, 차트, 시장 흐름)을 구조적으로 정리하거나 리스크를 평가해야 할 때 사용한다.
+description: Engineers analyzing stocks must use this skill when structuring company, financial, chart, and market-flow analysis to report risks clearly.
 ---
 
 # Stock Analysis Skill
 
-## 목적
-주식 분석 요청에 대해 근거 기반으로 구조화된 판단과 리스크 요약을 제공한다.
+# Must
 
-## 규칙
-1. 분석 목적(투자/트레이딩/학습)과 기간(단기/중기/장기)을 먼저 확인한다.
-1. 확정적 수익 보장은 금지하고, 불확실성과 한계를 명시한다.
-1. 수치·지표를 말할 때는 출처 또는 계산 근거를 함께 제시한다.
-1. 기술적 분석과 펀더멘털 분석을 구분해 설명한다.
-1. 리스크 요인을 반드시 항목으로 정리한다.
-1. 사용자 판단이 비현실적이면 명확히 지적하고 대안을 제시한다.
+## Scope
+- You must apply this document when analyzing a stock for investment review, trading review, or learning-oriented comparison.
+- You must use this document to structure evidence-based stock analysis output, not to promise returns or give certainty.
 
-## 기본 분석 항목
-1. 가격/수익률 추이 요약
-1. 거래량 및 변동성 특징
-1. 시장/섹터 흐름과 상대강도
-1. 주요 리스크(거시, 업종, 개별)
+## Source of Truth
+- This document is the single source of truth for stock-analysis structure, evidence presentation, and risk-reporting rules in `stock-analysis`; it does not govern governance tiers, prompt-routing decisions, or data-fetching tool selection.
+- `research` is the single source of truth for fact-versus-interpretation separation when a stock-analysis request expands into broader topic research, because cross-topic evidence separation belongs to `research` rather than this stock-specific structure rule.
 
-## 산출물 형식
-1. 결론을 먼저 한 줄로 제시한다.
-1. 근거를 번호 또는 bullet로 구조화한다.
-1. 마지막에 실행 가능한 다음 단계(데이터 확인, 리밸런싱 등)를 제안한다.
+## Analysis Setup Rules
+- You must define the analysis purpose as investment review, trading review, or learning before presenting conclusions.
+- You must define the analysis horizon as short-term, mid-term, or long-term before presenting conclusions.
+- You must state uncertainty and analytical limits when evidence is incomplete, delayed, or assumption-based.
+- You must reject guaranteed-profit framing when the request asks for certainty or fixed returns.
+
+## Evidence and Method Rules
+- You must attach a source or calculation basis when presenting a number, ratio, or indicator.
+- You must distinguish technical analysis from fundamental analysis when both appear in one answer.
+- You must label unsupported assumptions as `unverified`.
+- You must challenge unrealistic user judgment directly and provide a safer alternative or a narrower interpretation.
+
+## Minimum Analysis Coverage Rules
+- You must summarize price trend or return trend when trend evidence is available.
+- You must describe volume behavior or volatility behavior when market-action evidence is available.
+- You must explain market-flow, sector-flow, or relative-strength context when comparative evidence is available.
+- You must list major risks as separate items and include macro, industry, or company-specific risk when relevant evidence exists.
+
+## Output Rules
+- You must state the conclusion first.
+- You must present supporting evidence in bullets or clearly separated sections.
+- You must end with a practical next step such as additional data check, risk review, or scenario comparison.
+
+# Must NOT
+
+- You must not present stock analysis as guaranteed profit guidance.
+- You must not mix technical-analysis claims and fundamental-analysis claims without labeling the method.
+- You must not present a numeric claim without a source or calculation basis.
+- You must not hide uncertainty or downside risk behind definitive wording.
+
+# Flow
+
+1. Define the purpose and horizon of the requested stock analysis.
+2. Gather evidence and separate technical, fundamental, and contextual signals.
+3. Summarize trend, volume or volatility, comparative context, and major risks.
+4. State the conclusion first and follow with evidence-backed reasoning.
+5. End with a practical next step or missing-data check.
+
+# Definition of Done
+
+## Verification
+- The analysis purpose and horizon are defined before conclusions.
+- Technical and fundamental analysis are distinguishable when both are used.
+- Numeric claims include a source or calculation basis.
+- Major risks are listed as separate items when relevant evidence exists.
+- The output states the conclusion first and ends with a practical next step.

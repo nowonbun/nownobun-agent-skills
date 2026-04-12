@@ -18,10 +18,10 @@ description: Agents and authors must use this global vocabulary baseline to inte
 - You must not define rationale-storage operations (storage location, retention period, or ticket linkage) in this document.
 
 ## Source of Truth
-- This document is the single source of truth for vocabulary and rule-strength interpretation.
-- `constitution-rule` is the single source of truth for constitution-authoring boundaries.
-- `skill-create-rule` is the single source of truth for skill-document format constraints.
-- `skill-modify-history` is the single source of truth for rationale/history recording operations.
+- This document governs vocabulary interpretation, rule-strength interpretation, registry category boundaries, and term-normalization behavior in `vocabulary-rule`; it does not govern constitution-authoring boundaries, skill-document format design, or history-record creation timing.
+- `constitution-rule` is the single source of truth for constitution-authoring boundaries; consult it when deciding how constitution layers, priority, and prohibited behaviors must be authored, not for vocabulary meaning or rule-strength interpretation.
+- `skill-create-rule` is the single source of truth for skill-document format constraints; consult it when deciding how a skill document must be structured or written, not for vocabulary meaning or registry category decisions.
+- `skill-modify-history` is the single source of truth for rationale/history recording operations; consult it when deciding whether and how vocabulary-rule revisions must be recorded, not for vocabulary registry meaning or rule-strength interpretation.
 
 ## Registry Control
 - You must maintain the active registry at `harness/codex-harness/vocabulary-management/vocabulary-registry.md`.

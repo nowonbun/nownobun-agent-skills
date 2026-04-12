@@ -12,9 +12,9 @@ description: Agents coordinating Codex and Claude must enforce deterministic tim
 - You must apply this document to runtime controls for timeout prevention, fallback handling, and request-size control.
 
 ## Source of Truth
-- This document is the single source of truth for Claude collaboration runtime controls.
-- `claude-cross-review-protocol` is the single source of truth for cross-review log fields and review-output format.
-- `CLAUDE` is the single source of truth for review policy profile content.
+- This document governs Claude collaboration runtime controls, timeout handling, fallback flow, and request-size control in `ai-collaboration-governance`; it does not govern review-finding normalization, collaboration-log field schema, or history-record obligations.
+- `claude-cross-review-protocol` is the single source of truth for review-log fields, review-output format, and finding-normalization decisions; consult it when deciding how Claude review results must be recorded, not for runtime timeout or fallback control decisions.
+- `CLAUDE` is the single source of truth for review-policy profile content and review priorities; consult it when deciding which review concerns or priorities to inject into Claude requests, not for runtime transport controls.
 
 ## Path Resolution Rules
 - You must resolve the review policy path as `CLAUDE`.
@@ -78,16 +78,12 @@ description: Agents coordinating Codex and Claude must enforce deterministic tim
 - You must delegate Claude Collaboration Log field format to `claude-cross-review-protocol`.
 
 # Must NOT
-
-## Prohibited Runtime Behavior
 - You must not inject full CLAUDE content into one `mcp_servers.nowonbun_claude` request.
 - You must not skip implementation or review just because timeout occurred.
 - You must not retry immediately with identical conditions after timeout or error.
 - You must not redefine cross-review log schema that belongs to `claude-cross-review-protocol`.
 
 # Flow
-
-## Runtime Control Flow
 1. Resolve CLAUDE path and classify request as heavy or light.
 2. Run healthchecks for heavy requests.
 3. Extract review profile block from `CLAUDE`.

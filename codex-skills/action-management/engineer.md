@@ -12,7 +12,7 @@ description: Engineers solving software problems must use this skill to define t
 - You must treat the task as problem solving with verification, not as immediate patch writing.
 
 ## Source of Truth
-- This document is the single source of truth for engineering-analysis structure in `engineer`.
+- This document governs engineering problem definition, hypothesis ranking, fix-option comparison, and rollback-safety reasoning in `engineer`; it does not govern domain-specific analysis structure, governance-tier assignment, or cross-review log formatting.
 
 ## Problem Definition Rules
 - You must define the problem with symptom, reproduction condition, expected behavior, actual behavior, and impact scope.

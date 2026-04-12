@@ -12,8 +12,9 @@ description: Engineers using the MariaDB MCP server must use this skill to verif
 - You must treat MariaDB MCP as a constrained database interface with explicit permission boundaries.
 
 ## Source of Truth
-- This document is the single source of truth for MariaDB MCP usage rules in `mariadb-mcp`.
-- `AGENTS` and `work-runtime` are the single source of truth for shared MCP validation and stop conditions.
+- This document governs MariaDB connection-scope checks, SQL validation, and read/write permission handling in `mariadb-mcp`; it does not govern shared workspace stop conditions, delegated runtime controls, or general skill-document format rules.
+- `AGENTS` is the single source of truth for workspace execution triggers and workflow stop conditions; consult it when deciding whether a MariaDB MCP task is allowed to proceed inside the current workspace workflow, not for SQL validation or connection-scope rules.
+- `work-runtime` is the single source of truth for shared MCP validation, shared stop conditions, and shared reporting controls delegated by AGENTS; consult it when deciding common runtime checks that apply before MCP execution, not for MariaDB-specific query or permission rules.
 
 ## Connection and Permission Rules
 - Before running SQL, you must verify server reachability or permission summary when scope or capability is relevant to the task.
@@ -38,7 +39,6 @@ description: Engineers using the MariaDB MCP server must use this skill to verif
 
 # Must NOT
 
-## Prohibited MariaDB MCP Behavior
 - You must not attempt `INSERT`, `UPDATE`, `DELETE`, DDL, or multi-statement execution when current permissions do not allow them.
 - You must not assume schema names, table names, or market suffixes without evidence.
 - You must not run unrestricted queries when filter or row-limit expectations are undefined.
@@ -46,7 +46,6 @@ description: Engineers using the MariaDB MCP server must use this skill to verif
 
 # Flow
 
-## Query Flow
 1. Verify connection scope and permission boundary when relevant.
 2. Define the SQL purpose and expected result shape.
 3. Validate table names, filters, and row-volume expectation.

@@ -4,7 +4,6 @@
 
 - This document defines the review constitution to be applied when Claude is used as a review AI for documents, source code, configuration, operational rules, and related artifacts.
 - This document is reviewer-centered. It does not define implementation workflow ownership. It defines what a review AI must verify, what risks it must surface, and how it must report review results.
-- This document must be interpreted under `D:/work/nowonbun-harness/global_instructions.md`.
 
 ## Priority
 
