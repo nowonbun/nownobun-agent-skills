@@ -24,7 +24,7 @@ description: Agents and authors must use this global vocabulary baseline to inte
 - `skill-modify-history` is the single source of truth for rationale/history recording operations; consult it when deciding whether and how vocabulary-rule revisions must be recorded, not for vocabulary registry meaning or rule-strength interpretation.
 
 ## Registry Control
-- You must maintain the active registry at `harness/codex-harness/vocabulary-management/vocabulary-registry.md`.
+- You must maintain the active registry at `codex-skills/vocabulary-management/vocabulary-registry.md`.
 - The registry must contain at least one executable term entry at all times.
 - You must use only these categories: `priority`, `time`, `scope`, `state`, `risk`, `action`, `report-status`.
 - The category set above must be treated as sufficient because it covers decision axis, temporal axis, boundary axis, lifecycle axis, risk axis, operation axis, and reporting axis.
@@ -56,7 +56,7 @@ description: Agents and authors must use this global vocabulary baseline to inte
 - You must treat the priority order as `global_instructions` > `AGENTS` unless a higher-layer delegation explicitly overrides it.
 
 ## History Path
-- The configured history path for this skill is `history/codex-harness/vocabulary-management/vocabulary-rule/`.
+- The configured history path for this skill is `history/codex-skills/vocabulary-management/vocabulary-rule/`.
 - When registry meaning or rule interpretation changes, you must record the revision in the configured history path.
 
 # Must NOT
@@ -97,9 +97,9 @@ description: Agents and authors must use this global vocabulary baseline to inte
 - No forbidden ambiguous-term usage is present.
 - Single-source reference documents are explicitly identified.
 - Active registry exists and contains at least one executable term entry.
-- If term meaning was revised, a history record exists in `history/codex-harness/vocabulary-management/vocabulary-rule/`.
+- If term meaning was revised, a history record exists in `history/codex-skills/vocabulary-management/vocabulary-rule/`.
 
 ## Monitoring
-- The terminology-conflict checklist must be maintained at `harness/codex-harness/vocabulary-management/vocabulary-terminology-conflict-checklist.md` by the designated document owner.
+- The terminology-conflict checklist must be maintained at `codex-skills/vocabulary-management/vocabulary-terminology-conflict-checklist.md` by the designated document owner.
 - When a new governed document is added, you must include this document in the terminology-conflict checklist.
 - At least once per quarter, the designated document owner (human reviewer or automation maintainer) must sample governed documents and verify strength-expression consistency.
