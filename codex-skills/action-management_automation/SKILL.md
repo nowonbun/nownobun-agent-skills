@@ -1,6 +1,6 @@
 ---
 name: automation
-description: Engineers designing or improving automation must use this skill to evaluate operating value, control execution boundaries, and define recovery procedures.
+description: 자동화를 설계하거나 개선하는 엔지니어는 이 기술을 사용하여 운영 가치를 평가하고, 실행 경계를 제어하고, 복구 절차를 정의해야 합니다.
 ---
 
 # Automation Skill
@@ -8,61 +8,61 @@ description: Engineers designing or improving automation must use this skill to 
 # Must
 
 ## Scope
-- You must apply this document when designing, reviewing, or extending automation for scripts, CI/CD, scheduled jobs, or local and cloud operations.
-- You must evaluate automation as an operating system with control and recovery, not as a one-off script.
+- 스크립트, CI/CD, 예약된 작업 또는 로컬 및 클라우드 운영을 위한 자동화를 설계, 검토 또는 확장할 때 이 문서를 적용해야 합니다.
+- 자동화는 일회성 스크립트가 아닌 제어 및 복구 기능을 갖춘 운영 체제로 평가해야 합니다.
 
 ## Source of Truth
-- This document governs automation value framing, execution-boundary definition, and recovery-structure design in `./SKILL.md`; it does not govern governance-tier selection, document-format rules, or MCP-specific validation procedures.
+- 이 문서는 `./SKILL.md`에 명시된 자동화 가치 정의, 실행 경계 정의 및 복구 구조 설계에 대한 지침을 제공합니다. 거버넌스 계층 선택, 문서 형식 규칙 또는 MCP 관련 유효성 검사 절차는 이 문서의 지침이 아닙니다.
 
 ## Value and Suitability Rules
-- You must evaluate whether automation reduces operating cost, error rate, or response time before implementation.
-- You must reduce scope when exception frequency or manual judgment cost makes full automation unsafe.
-- You must document why the task should be fully automated, partially automated, or kept manual.
+- 자동화를 구현하기 전에 운영 비용, 오류율 또는 응답 시간을 줄이는지 평가해야 합니다.
+- 예외 발생 빈도 또는 수동 판단 비용으로 인해 완전 자동화가 안전하지 않은 경우 적용 범위를 축소해야 합니다.
+- 작업이 완전 자동화, 부분 자동화 또는 수동으로 처리되어야 하는 이유를 문서화해야 합니다.
 
 ## Workflow Design Rules
-- You must separate the workflow into trigger, input collection, pre-validation, main execution, post-validation, and reporting.
-- You must define the execution owner and execution condition for each workflow.
-- You must document dependencies, external systems, and required credentials explicitly.
+- 워크플로우는 트리거, 입력 수집, 사전 유효성 검사, 주요 실행, 사후 유효성 검사 및 보고 단계로 구분해야 합니다.
+- 각 워크플로우에 대한 실행 담당자와 실행 조건을 정의해야 합니다.
+- 종속성, 외부 시스템 및 필요한 자격 증명을 명확하게 문서화해야 합니다.
 
 ## Control Rules
-- You must classify execution into automatic, scheduled, approval-required, or operator-only modes.
-- You must apply stricter control to deletion, deployment, payment, permission change, and large-scale update actions.
-- You must make manual intervention points explicit.
+- 실행은 자동, 예약, 승인 필요 또는 운영자 전용 모드로 분류해야 합니다.
+- 삭제, 배포, 결제, 권한 변경 및 대규모 업데이트 작업에는 더 엄격한 제어를 적용해야 합니다.
+- 수동 개입 지점을 명확하게 표시해야 합니다.
 
 ## Failure and Recovery Rules
-- You must define retry conditions separately from immediate-stop conditions.
-- You must define how duplicate runs, partial success, timeout, and upstream-service failure are detected.
-- You must define rollback or manual recovery steps for workflows that can change external state.
+- 재시도 조건과 즉시 중지 조건을 별도로 정의해야 합니다.
+- 중복 실행, 부분 성공, 시간 초과 및 상위 서비스 오류를 감지하는 방법을 정의해야 합니다.
+- 외부 상태를 변경할 수 있는 워크플로우에 대해 롤백 또는 수동 복구 단계를 정의해야 합니다.
 
 ## Security and Operability Rules
-- You must store secrets through environment variables, secret managers, or equivalent controlled storage.
-- You must define logs, alerts, and audit trails needed for operators.
-- You must define where configuration lives and how operators can override or disable the automation safely.
+- 환경 변수, 비밀 관리자 또는 이와 동등한 제어된 저장소를 통해 비밀 정보를 저장해야 합니다.
+- 운영자에게 필요한 로그, 경고 및 감사 추적을 정의해야 합니다.
+- 구성 파일의 위치와 운영자가 자동화를 안전하게 재정의하거나 비활성화하는 방법을 정의해야 합니다.
 
 # Must NOT
 
 ## Prohibited Automation Behavior
-- You must not automate a workflow only because scripting is technically possible.
-- You must not hide operator-only steps or approval points.
-- You must not store secrets in source-controlled plaintext files.
-- You must not omit post-validation when the workflow changes shared state or production systems.
-- You must not expand automation scope when recovery capability is undefined.
+- 스크립팅이 기술적으로 가능하다는 이유만으로 워크플로를 자동화해서는 안 됩니다.
+- 운영자 전용 단계 또는 승인 지점을 숨겨서는 안 됩니다.
+- 소스 코드 관리되는 일반 텍스트 파일에 비밀 정보를 저장해서는 안 됩니다.
+- 워크플로가 공유 상태 또는 프로덕션 시스템을 변경할 때 사후 유효성 검사를 생략해서는 안 됩니다.
+- 복구 기능이 정의되지 않은 경우 자동화 범위를 확장해서는 안 됩니다.
 
 # Flow
 
 ## Design Flow
-1. Evaluate operating value and automation suitability.
-2. Decide full automation, partial automation, or manual handling.
-3. Define workflow stages, owners, dependencies, and control mode.
-4. Define validation, failure detection, retry, and recovery behavior.
-5. Define security controls, logs, alerts, and operator override method.
-6. Verify that automation scope does not exceed recovery capability.
+1. 운영 가치 및 자동화 적합성을 평가합니다.
+2. 전체 자동화, 부분 자동화 또는 수동 처리 방식을 결정합니다.
+3. 워크플로 단계, 담당자, 종속성 및 제어 모드를 정의합니다.
+4. 유효성 검사, 오류 감지, 재시도 및 복구 동작을 정의합니다.
+5. 보안 제어, 로그, 경고 및 운영자 재정의 방법을 정의합니다.
+6. 자동화 범위가 복구 기능을 초과하지 않는지 확인합니다.
 
 # Definition of Done
 
 ## Verification
-- Automation value and scope decision are documented.
-- Workflow stages, owners, and dependencies are explicit.
-- Control mode and approval points are documented.
-- Failure detection, retry, stop, and recovery rules are explicit.
-- Secret handling, logging, and operator controls are documented.
+- 자동화 가치 및 범위 결정 사항이 문서화되어 있습니다.
+- 워크플로 단계, 담당자 및 종속성이 명확하게 정의되어 있습니다.
+- 제어 모드 및 승인 지점이 문서화되어 있습니다.
+- 오류 감지, 재시도, 중지 및 복구 규칙이 명확하게 정의되어 있습니다.
+- 비밀 키 처리, 로깅 및 운영자 제어가 문서화되어 있습니다.
