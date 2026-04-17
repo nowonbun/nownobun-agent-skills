@@ -30,7 +30,7 @@ Codex/Claude 기반 로컬 AI 작업 환경에서 사용하는 하네스 문서,
 - 워크스페이스 범위와 폴더 책임
 - 실행 트리거
 - 워크플로
-- 중단 조건과 보고 형식
+- 중지 조건과 보고 형식
 
 ### `CLAUDE.md`
 - Claude를 리뷰 AI로 사용할 때의 검토 기준
@@ -45,12 +45,23 @@ nowonbun-harness/
 ├─ CLAUDE.md
 ├─ README.md
 ├─ codex-skills/
-│  ├─ action-management/
-│  ├─ runtime-management/
-│  ├─ skill-management/
-│  ├─ stock-management/
-│  ├─ tool-usage-management/
-│  └─ vocabulary-management/
+│  ├─ action-management_ai-agent/
+│  │  └─ SKILL.md
+│  ├─ action-management_automation/
+│  │  └─ SKILL.md
+│  ├─ action-management_reality-check/
+│  │  └─ SKILL.md
+│  ├─ runtime-management_claude-review-runtime/
+│  │  └─ SKILL.md
+│  ├─ runtime-management_work-runtime/
+│  │  └─ SKILL.md
+│  ├─ tool-usage-management_github-mcp/
+│  │  └─ SKILL.md
+│  ├─ vocabulary-management/
+│  │  └─ vocabulary-registry.md
+│  ├─ vocabulary-management_vocabulary-rule/
+│  │  └─ SKILL.md
+│  └─ ...
 ├─ doc/
 ├─ script/
 ├─ history/
@@ -60,18 +71,26 @@ nowonbun-harness/
 
 ## `codex-skills` 구성
 
-`codex-skills/`는 역할별 문서를 나눠 관리한다.
+`codex-skills/` 아래 스킬은 `분류명_스킬명/` 폴더 단위로 관리하고, 각 폴더의 본문 문서는 `SKILL.md`다.
 
-- `action-management/`: 작업 수행 방식
-  - 예: `ai-agent.md`, `automation.md`, `coding-assistant.md`, `engineer.md`, `research.md`
-- `runtime-management/`: 실행 중 공통 제어 규칙
-  - 예: `work-runtime.md`, `claude-review-runtime.md`, `markdown-safe-writing.md`
-- `skill-management/`: 스킬/거버넌스 규칙
-  - 예: `constitution-rule.md`, `skill-create-rule.md`, `skill-check-rule.md`
-- `tool-usage-management/`: 외부 도구/MCP 사용 규칙
-  - 예: `github-mcp.md`, `mariadb-mcp.md`, `stock-mcp.md`
-- `vocabulary-management/`: 용어 정의와 해석 기준
-- `stock-management/`: 주식 분석 관련 문서
+예:
+- `action-management_ai-agent/SKILL.md`
+- `action-management_automation/SKILL.md`
+- `action-management_reality-check/SKILL.md`
+- `runtime-management_work-runtime/SKILL.md`
+- `tool-usage-management_github-mcp/SKILL.md`
+- `vocabulary-management_vocabulary-rule/SKILL.md`
+
+별도로 `vocabulary-management/` 폴더에는 활성 어휘 레지스트리인 `vocabulary-registry.md`가 있다.
+
+분류 기준은 대략 다음과 같다.
+
+- `action-management_*`: 작업 수행 방식
+- `runtime-management_*`: 실행 중 공통 제어 규칙
+- `skill-management_*`: 스킬/거버넌스 규칙
+- `tool-usage-management_*`: 외부 도구/MCP 사용 규칙
+- `vocabulary-management_*`: 용어 정의와 해석 기준
+- `stock-management_*`: 주식 분석 관련 문서
 
 ## 스크립트
 

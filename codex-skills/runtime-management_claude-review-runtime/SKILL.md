@@ -14,19 +14,19 @@ description: Claude MCP 교차 검토를 실행해야 하는 에이전트는 이
 ## Applicability Rules
 - 관리되는 하네스 범위 내에서 코드, 문서, 구성, 규칙 문서 또는 워크플로 정의를 변경하는 모든 작업에 이 문서를 사용해야 합니다.
 - 호출 전에 검토 단계를 `plan-review`, `source-review`, `result-review` 또는 `re-review`로 분류해야 합니다.
-- `plans-review`는 실행 가능한 구현 계획이 준비된 후 실행이 시작되기 전에 수행되는 첫 번째 검토를 의미합니다.
+- `plan-review`는 실행 가능한 구현 계획이 준비된 후 실행이 시작되기 전에 수행되는 첫 번째 검토를 의미합니다.
 - `source-review`는 소스 수정 사항이 발생한 후 최종 완료 보고 전에 수행되는 검토를 의미합니다.
 - `result-review`는 파일 변경, 문서 변경, 구성 변경 또는 규칙 변경과 같은 구체적인 결과가 실행된 후 수행되는 검토를 의미합니다.
 - `re-review`는 이전 Claude 발견 사항에 대한 수정 변경 사항이 적용된 후 수행되는 반복 검토를 의미합니다.
-- 작업에 계획 및 실행이 포함된 경우 `plans-review`를 먼저 실행해야 합니다.
+- 작업에 계획 및 실행이 포함된 경우 `plan-review`를 먼저 실행해야 합니다.
 - 작업에서 소스 파일이 변경되는 경우 완료 보고 전에 `source-review`를 실행해야 합니다.
 - 실행에서 구체적인 결과가 발생한 경우 결과가 나온 후 `result-review`를 실행해야 합니다.
 - 실행 가능한 계획이 아직 없는 경우 검토 시작을 중지하고 `cross-review: blocked (reason: no actionable plan)`을 보고해야 합니다.
 
 ## Source of Truth
 - 이 문서는 `./SKILL.md`에 명시된 Claude 리뷰 런타임 진입 조건, 리뷰 단계 적용 가능성, 로컬 사전 검사 및 프로토콜 인계 동작을 규정합니다. Claude 발견 정규화, 협업 로그 스키마 또는 이력 레코드 생성 기준은 규정하지 않습니다.
-- `../tool-usage-management_claude-cross-review-protocol/SKILL.md`는 Claude 호출 구조, 필수 리뷰 축, 발견 정규화 및 협업 로그 형식에 대한 유일한 정보 출처입니다. 런타임 진입 성공 후 리뷰 호출 구조 및 보고 방식을 결정할 때 이 문서를 참조하십시오. 단계 적용 가능성 또는 로컬 사전 검사 결정에는 이 문서를 참조하지 마십시오.
-- `../skill-management_skill-modify-history/SKILL.md`는 이 런타임 스킬 또는 프로토콜을 수정할 때 이력 레코드 의무 사항에 대한 유일한 정보 출처입니다. 수정 사항을 이력 아티팩트에 기록해야 하는지 여부 및 방법을 결정할 때 이 문서를 참조하십시오. Claude 리뷰 시작 동작에는 이 문서를 참조하지 마십시오.
+- `../tool-usage-management_claude-cross-review-protocol/SKILL.md`는 Claude 호출 구조, 필수 리뷰 축, 발견 정규화 및 협업 로그 형식에 대한 유일한 기준 문서입니다. 런타임 진입 성공 후 리뷰 호출 구조 및 보고 방식을 결정할 때 이 문서를 참조하십시오. 단계 적용 가능성 또는 로컬 사전 검사 결정에는 이 문서를 참조하지 마십시오.
+- `../skill-management_skill-modify-history/SKILL.md`는 이 런타임 스킬 또는 프로토콜을 수정할 때 이력 레코드 의무 사항에 대한 유일한 기준 문서입니다. 수정 사항을 이력 아티팩트에 기록해야 하는지 여부 및 방법을 결정할 때 이 문서를 참조하십시오. Claude 리뷰 시작 동작에는 이 문서를 참조하지 마십시오.
 
 ## Local Preflight Rules
 - Claude MCP를 호출하기 전에 현재 환경에서 `mcp_servers.nowonbun_claude` 서버를 사용할 수 있는지 확인해야 합니다.
@@ -50,7 +50,7 @@ description: Claude MCP 교차 검토를 실행해야 하는 에이전트는 이
 - 이 하네스의 실행 진입점으로 `mcp_servers.nowonbun_claude`를 사용해야 합니다.
 - 호출 실패 시, `../tool-usage-management_claude-cross-review-protocol/SKILL.md`에 정의된 재시도 및 차단 상태 규칙을 따라야 합니다.
 - 각 `plan-review`, `source-review`, `result-review` 또는 `re-review` 후에는 활성 대화에서 사용자에게 검토 결과를 보고해야 합니다.
-- 사용자에게 표시되는 보고서에는 `phase`, `cross-review status`, `summary`, `key findings` 및 `next action`가 포함되어야 합니다.
+- 사용자에게 표시되는 보고서에는 `단계`, `교차 검토 상태`, `요약`, `주요 결과` 및 `다음 조치`가 포함되어야 합니다.
 
 # Must NOT
 - `../tool-usage-management_claude-cross-review-protocol/SKILL.md`에 이미 포함된 정규화 규칙을 재정의해서는 안 됩니다.
@@ -60,7 +60,7 @@ description: Claude MCP 교차 검토를 실행해야 하는 에이전트는 이
 
 # Flow
 1. `## Applicability Rules`에 따라 필수 검토 단계 순서를 결정합니다.
-2. 검토 단계를 `plans-review`, `source-review`, `result-review` 또는 `re-review`로 분류합니다.
+2. 검토 단계를 `plan-review`, `source-review`, `result-review` 또는 `re-review`로 분류합니다.
 3. 로컬 MCP 가용성 및 응답성 검사를 실행합니다.
 4. 해당되는 경우 검토 목표, 대상 경로 및 문서 무결성 검사를 준비합니다.
 5. 실행을 `../tool-usage-management_claude-cross-review-protocol/SKILL.md`로 인계합니다.
