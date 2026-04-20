@@ -19,6 +19,7 @@ description: Claude MCP 교차 검토를 실행해야 하는 에이전트는 이
 - `result-review`는 파일 변경, 문서 변경, 구성 변경 또는 규칙 변경과 같은 구체적인 결과가 실행된 후 수행되는 검토를 의미합니다.
 - `re-review`는 이전 Claude 발견 사항에 대한 수정 변경 사항이 적용된 후 수행되는 반복 검토를 의미합니다.
 - 작업에 계획 및 실행이 포함된 경우 `plan-review`를 먼저 실행해야 합니다.
+- 작업에 쓰기 의도가 포함되어 있고 실행 가능한 계획은 존재하지만 `plan-review`가 아직 실행되거나 사용자 대화에 보고되지 않은 경우, 쓰기 실행을 시작해서는 안 되며 `cross-review: blocked (reason: plan-review not completed)`를 보고해야 합니다.
 - 작업에서 소스 파일이 변경되는 경우 완료 보고 전에 `source-review`를 실행해야 합니다.
 - 실행에서 구체적인 결과가 발생한 경우 결과가 나온 후 `result-review`를 실행해야 합니다.
 - 실행 가능한 계획이 아직 없는 경우 검토 시작을 중지하고 `cross-review: blocked (reason: no actionable plan)`을 보고해야 합니다.
@@ -62,9 +63,10 @@ description: Claude MCP 교차 검토를 실행해야 하는 에이전트는 이
 1. `## Applicability Rules`에 따라 필수 검토 단계 순서를 결정합니다.
 2. 검토 단계를 `plan-review`, `source-review`, `result-review` 또는 `re-review`로 분류합니다.
 3. 로컬 MCP 가용성 및 응답성 검사를 실행합니다.
-4. 해당되는 경우 검토 목표, 대상 경로 및 문서 무결성 검사를 준비합니다.
-5. 실행을 `../tool-usage-management_claude-cross-review-protocol/SKILL.md`로 인계합니다.
-6. 프로토콜에 정의된 출력 및 로그 형식을 사용하여 결과를 보고하고, 필요한 사용자 대상 대화 요약도 제공합니다.
+4. 해당되는 경우 검토 목표, 대상 경로 및 문서 무결성 검사를 준비하고, 계획 부재와 `plan-review` 미완료를 서로 다른 차단 조건으로 판정합니다.
+5. 실행 가능한 계획이 있으나 `plan-review`가 완료되지 않은 상태에서 쓰기 의도가 확인되면 `cross-review: blocked (reason: plan-review not completed)`를 보고하고 쓰기 시작을 차단합니다.
+6. 실행을 `../tool-usage-management_claude-cross-review-protocol/SKILL.md`로 인계합니다.
+7. 프로토콜에 정의된 출력 및 로그 형식을 사용하여 결과를 보고하고, 필요한 사용자 대상 대화 요약도 제공합니다.
 
 # Definition of Done
 
@@ -72,6 +74,7 @@ description: Claude MCP 교차 검토를 실행해야 하는 에이전트는 이
 - `## Applicability Rules`에 따라 필수 적용 여부가 결정되었습니다.
 - 실행 전에 검토 단계가 분류되었습니다.
 - 프로토콜 인계 전에 로컬 MCP 사전 검사가 성공했거나, 차단 결과가 보고되었습니다.
+- 실행 가능한 계획 부재와 `plan-review` 미완료가 서로 다른 차단 조건으로 판정되었습니다.
 - 텍스트 문서 검토 목표에는 적용 가능한 경우 UTF-8 무결성 및 텍스트 보존 검사가 포함됩니다.
 - 호출, 정규화 및 보고 규칙은 중복된 로컬 규칙 텍스트 없이 `../tool-usage-management_claude-cross-review-protocol/SKILL.md`에 위임되었습니다.
 - 각 필수 검토 단계에 대한 사용자에게 표시되는 검토 요약이 보고되었습니다.

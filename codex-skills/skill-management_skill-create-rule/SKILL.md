@@ -102,7 +102,7 @@ description: <기능과 적용 시점을 한 문장으로 설명>
 - `../skill-management_skill-governance-rule/SKILL.md`는 거버넌스 계층 할당 및 엄격 트리거 조건에 대한 유일한 기준 문서입니다. 승인 요건 또는 위험 분류를 결정할 때 참조해야 하며, 형식이나 구조에 대한 질문은 참조하지 마십시오.
 - `../skill-management_skill-modify-history/SKILL.md`는 이력 기록 생성 의무 및 일별 기준에 대한 유일한 기준 문서입니다. 수정 사항에 새 이력 파일이 필요한지 여부를 결정할 때 참조해야 하며, 스킬 문서 자체에 포함되어야 하는 내용에 대한 질문은 참조하지 마십시오.
 - `../tool-usage-management_claude-cross-review-protocol/SKILL.md`는 교차 검토 호출 형식 및 출력 스키마에 대한 유일한 기준 문서입니다. 검토 출력이 정의된 로그 구조를 준수해야 할 때 이 문서를 참조해야 하며, 스킬 규칙 작성 방법에 대해서는 참조하지 마십시오.
-- `global_instructions`는 전역 응답 원칙 및 사용자 프로필에 대한 유일한 기준 문서입니다. 충돌이 발생할 경우 다른 모든 문서보다 우선합니다.
+- `global_instructions.md`는 전역 응답 원칙 및 사용자 프로필에 대한 유일한 기준 문서입니다. 충돌이 발생할 경우 다른 모든 문서보다 우선합니다.
 
 # Must NOT
 
